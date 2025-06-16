@@ -13,7 +13,7 @@ class ListAccusedProfiles extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Create Suspect Profile'),
+            Actions\CreateAction::make(),
         ];
     }
 }

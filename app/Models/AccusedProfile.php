@@ -49,6 +49,7 @@ class AccusedProfile extends Model implements HasMedia
         'lien_amount',
         'case_date',
         'accused_role',
+        'created_by',
     ];
 
     protected $casts = [
@@ -60,11 +61,11 @@ class AccusedProfile extends Model implements HasMedia
         'email_addresses' => 'array',
         'social_media_profiles' => 'array',
         'family_members' => 'array',
-    
+        'devices' => 'array',
         'bank_accounts' => 'array',
-      
+        'ip_addresses' => 'array',
         'locations' => 'array',
-
+        // 'additional_info' => 'array',
     ];
 
     public function case(): BelongsTo
@@ -118,5 +119,10 @@ class AccusedProfile extends Model implements HasMedia
         $accounts[] = array_merge($accountInfo, ['added_at' => now()->toDateTimeString()]);
         $this->bank_accounts = $accounts;
         $this->save();
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

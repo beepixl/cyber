@@ -5,15 +5,7 @@ use App\Filament\Resources\CyberCaseResource\Pages\PrintCyberCase;
 use App\Http\Controllers\AccusedProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
 
-Livewire::setScriptRoute(function ($handle) {
-return Route::get('/cyber/public/livewire/livewire.js', $handle);
-});
-
-Livewire::setUpdateRoute(function ($handle) {
-return Route::post('/cyber/public/livewire/update', $handle);
-});
 Route::get('/', function () {
     return view('welcome');
 });

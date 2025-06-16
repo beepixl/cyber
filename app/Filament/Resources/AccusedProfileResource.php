@@ -108,7 +108,18 @@ class AccusedProfileResource extends Resource
                         ->numeric()
                         ->prefix('₹')
                         ->label('Fraud Amount'),
+                    TextInput::make('disputed_amount')
+                        ->numeric()
+                        ->prefix('₹')
+                        ->label('Disputed Amount'),
                     TextInput::make('compliant_person')->label('Victim Name'),
+
+                    Select::make('created_by')
+                        ->label('Created By')
+                        ->relationship('creator', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->required(),
 
                 ])
                 ->columns(2),
@@ -296,6 +307,14 @@ class AccusedProfileResource extends Resource
                     ->money('INR')
                     ->label('Fraud Amount')
                     ->sortable(),
+                TextColumn::make('disputed_amount')
+                    ->money('INR')
+                    ->label('Disputed Amount')
+                    ->sortable(),
+                TextColumn::make('creator.name')
+                    ->label('Created By')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('police_station')
@@ -321,6 +340,11 @@ class AccusedProfileResource extends Resource
                         ->distinct()
                         ->pluck('state', 'state')
                         ->filter()),
+                SelectFilter::make('created_by')
+                    ->relationship('creator', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->label('Created By'),
             ], layout: FiltersLayout::AboveContent)
             ->headerActions([
                 // Tables\Actions\CreateAction::make(),

@@ -352,10 +352,10 @@ class AccusedProfileResource extends Resource
             ->actions([
 
                 Tables\Actions\EditAction::make(),
-                // Tables\Actions\Action::make('view')
-                //     ->url(fn (AccusedProfile $record): string => route('accused-profiles.show', $record))
-                //     ->openUrlInNewTab()
-                //     ->icon('heroicon-o-eye'),
+                Tables\Actions\Action::make('view')
+                    ->url(fn (AccusedProfile $record): string => route('accused-profiles.show', $record))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-eye'),
                 Tables\Actions\DeleteAction::make()
                     ->visible(fn () => auth()->user()->user_type === 'admin'),
             ])

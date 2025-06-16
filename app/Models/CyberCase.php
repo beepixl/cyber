@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,6 +31,7 @@ class CyberCase extends Model
         'complainant_pincode',
         'police_station',
         'status',
+        'users',
     ];
 
     protected $casts = [
@@ -50,5 +52,11 @@ class CyberCase extends Model
     public function fehrists(): HasMany
     {
         return $this->hasMany(Fehrist::class, 'case_id');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'users')
+            ->withTimestamps();
     }
 }

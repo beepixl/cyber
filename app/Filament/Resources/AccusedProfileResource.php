@@ -324,6 +324,13 @@ class AccusedProfileResource extends Resource
                         ->distinct()
                         ->pluck('police_station', 'police_station')
                         ->filter()),
+                SelectFilter::make('state')
+                    ->label('State')
+                    ->options(fn () => AccusedProfile::query()
+                        ->select('state')
+                        ->distinct()
+                        ->pluck('state', 'state')
+                        ->filter()),
 
                 SelectFilter::make('city')
                     ->label('City')
@@ -331,14 +338,6 @@ class AccusedProfileResource extends Resource
                         ->select('city')
                         ->distinct()
                         ->pluck('city', 'city')
-                        ->filter()),
-
-                SelectFilter::make('state')
-                    ->label('State')
-                    ->options(fn () => AccusedProfile::query()
-                        ->select('state')
-                        ->distinct()
-                        ->pluck('state', 'state')
                         ->filter()),
                 SelectFilter::make('created_by')
                     ->relationship('creator', 'name')
@@ -351,13 +350,14 @@ class AccusedProfileResource extends Resource
             ])
 
             ->actions([
-                Tables\Actions\Action::make('view')
-                    ->url(fn (AccusedProfile $record): string => route('accused-profiles.show', $record))
-                    ->openUrlInNewTab()
-                    ->icon('heroicon-o-eye'),
+
                 Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make()
-                //     ->visible(fn () => auth()->usertype() == 'admin'),
+                // Tables\Actions\Action::make('view')
+                //     ->url(fn (AccusedProfile $record): string => route('accused-profiles.show', $record))
+                //     ->openUrlInNewTab()
+                //     ->icon('heroicon-o-eye'),
+                Tables\Actions\DeleteAction::make()
+                    ->visible(fn () => auth()->user()->user_type === 'admin'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

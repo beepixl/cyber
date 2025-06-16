@@ -46,18 +46,18 @@ class AccusedProfileResource extends Resource
                 ->schema([
                     Select::make('police_station')
                         ->options([
-                            'Cyber Crime' => 'Cyber Crime',
-                            'Navsari Town' => 'Navsari Town',
-                            'Navsari Rural' => 'Navsari Rural',
-                            'Maroli' => 'Maroli',
-                            'Jalalpore' => 'Jalalpore',
-                            'Vijalpore' => 'Vijalpore',
-                            'Gandevi' => 'Gandevi',
                             'Bilimora' => 'Bilimora',
-                            'Dholai Marine' => 'Dholai Marine',
                             'Chikhli' => 'Chikhli',
-                            'Vansda' => 'Vansda',
+                            'Cyber Crime' => 'Cyber Crime',
+                            'Dholai Marine' => 'Dholai Marine',
+                            'Gandevi' => 'Gandevi',
+                            'Jalalpore' => 'Jalalpore',
                             'Khergam' => 'Khergam',
+                            'Maroli' => 'Maroli',
+                            'Navsari Rural' => 'Navsari Rural',
+                            'Navsari Town' => 'Navsari Town',
+                            'Vansda' => 'Vansda',
+                            'Vijalpore' => 'Vijalpore',
                         ])->required(),
                     TextInput::make('fir_no')->label('FIR No.')->required(),
                     // DatePicker::make('case_date')->label('FIR Date'),
@@ -309,31 +309,37 @@ class AccusedProfileResource extends Resource
                     ->money('INR')
                     ->label('Disputed Amount')
                     ->sortable(),
-                
+
             ])
             ->filters([
                 SelectFilter::make('police_station')
                     ->label('Police Station')
                     ->options(fn () => AccusedProfile::query()
                         ->select('police_station')
+                        ->orderBy('police_station')
                         ->distinct()
                         ->pluck('police_station', 'police_station')
-                        ->filter()),
+
+                        ->filter())
+                    ->searchable(),
                 SelectFilter::make('state')
                     ->label('State')
                     ->options(fn () => AccusedProfile::query()
-                        ->select('state')
                         ->distinct()
+                        ->orderBy('state') // Place BEFORE pluck
                         ->pluck('state', 'state')
-                        ->filter()),
+                        ->filter())
+                    ->searchable(),
 
                 SelectFilter::make('city')
                     ->label('City')
                     ->options(fn () => AccusedProfile::query()
-                        ->select('city')
                         ->distinct()
+                        ->orderBy('city')
                         ->pluck('city', 'city')
-                        ->filter()),
+                        ->filter())
+                    ->searchable(),
+
                 // SelectFilter::make('created_by')
                 //     ->relationship('creator', 'name')
                 //     ->searchable()

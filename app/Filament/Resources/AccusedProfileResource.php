@@ -118,9 +118,7 @@ class AccusedProfileResource extends Resource
                         ->label('Created By')
                         ->relationship('creator', 'name')
                         ->searchable()
-                        ->preload()
-                        ->required(),
-
+                        ->preload(),
                 ])
                 ->columns(2),
 
@@ -311,10 +309,7 @@ class AccusedProfileResource extends Resource
                     ->money('INR')
                     ->label('Disputed Amount')
                     ->sortable(),
-                TextColumn::make('creator.name')
-                    ->label('Created By')
-                    ->searchable()
-                    ->sortable(),
+                
             ])
             ->filters([
                 SelectFilter::make('police_station')
@@ -339,11 +334,11 @@ class AccusedProfileResource extends Resource
                         ->distinct()
                         ->pluck('city', 'city')
                         ->filter()),
-                SelectFilter::make('created_by')
-                    ->relationship('creator', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->label('Created By'),
+                // SelectFilter::make('created_by')
+                //     ->relationship('creator', 'name')
+                //     ->searchable()
+                //     ->preload()
+                //     ->label('Created By'),
             ], layout: FiltersLayout::AboveContent)
             ->headerActions([
                 // Tables\Actions\CreateAction::make(),

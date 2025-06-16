@@ -105,6 +105,12 @@
                 <th>Victim Name</th>
                 <td>{{ $accusedProfile->compliant_person }}</td>
             </tr>
+            <tr>
+                <th>Disputed Amount</th>
+                <td>₹{{ number_format($accusedProfile->disputed_amount, 2) }}</td>
+                <td></td>
+                <td></td>
+            </tr>
 
 
 

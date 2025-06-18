@@ -15,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -44,6 +45,7 @@ class AccusedProfileResource extends Resource
         return $form->schema([
             Section::make('Case Information')
                 ->schema([
+                    TextInput::make('status')->label('Status'),
                     Select::make('police_station')
                         ->options([
                             'Bilimora' => 'Bilimora',
@@ -114,11 +116,11 @@ class AccusedProfileResource extends Resource
                         ->label('Disputed Amount'),
                     TextInput::make('compliant_person')->label('Victim Name'),
 
-                    Select::make('created_by')
-                        ->label('Created By')
-                        ->relationship('creator', 'name')
-                        ->searchable()
-                        ->preload(),
+                    // Select::make('created_by')
+                    //     ->label('Created By')
+                    //     ->relationship('creator', 'name')
+                    //     ->searchable()
+                    //     ->preload(),
                 ])
                 ->columns(2),
 
@@ -297,6 +299,7 @@ class AccusedProfileResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->label('Suspect Name')->searchable(),
+                TextColumn::make('status')->label('Status')->searchable(),
                 TextColumn::make('police_station')->label('Police Station')->searchable(),
                 TextColumn::make('state')->searchable(),
                 TextColumn::make('city')->label('City')->searchable(),
@@ -353,13 +356,13 @@ class AccusedProfileResource extends Resource
             ->actions([
 
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('view')
+                Tables\Actions\Action::make('open pdf')
                     ->url(fn (AccusedProfile $record): string => route('accused-profiles.show', $record))
                     ->openUrlInNewTab()
                     ->icon('heroicon-o-eye'),
                 Tables\Actions\DeleteAction::make()
                     ->visible(fn () => auth()->user()->user_type === 'admin'),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

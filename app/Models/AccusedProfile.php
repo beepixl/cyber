@@ -50,6 +50,7 @@ class AccusedProfile extends Model implements HasMedia
         'case_date',
         'accused_role',
         'created_by',
+        'status',
     ];
 
     protected $casts = [

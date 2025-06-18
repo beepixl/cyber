@@ -20,6 +20,8 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class AccusedProfileResource extends Resource
 {
@@ -301,6 +303,7 @@ class AccusedProfileResource extends Resource
                 TextColumn::make('name')->label('Suspect Name')->searchable(),
                 TextColumn::make('status')->label('Status')->searchable(),
                 TextColumn::make('police_station')->label('Police Station')->searchable(),
+                TextColumn::make('fir_no')->label('Fir No')->searchable(),
                 TextColumn::make('state')->searchable(),
                 TextColumn::make('city')->label('City')->searchable(),
                 TextColumn::make('compliant_person')->label('Complaint Person')->searchable(),
@@ -365,7 +368,13 @@ class AccusedProfileResource extends Resource
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    //  Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()->label('Suspect Profiles')->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->withFilename('Suspect Profile-'.date('Y-m-d')),
+
+                    ]),
                 ]),
             ]);
     }

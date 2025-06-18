@@ -23,6 +23,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->maxContentWidth('full')
             ->id('admin')
             ->path('admin')
             ->login()

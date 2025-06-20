@@ -52,13 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_DEBUG', false)
-        ? 'http://127.0.0.1:8000/'
-        : env('APP_URL', 'http://10.159.191.117/cyber/public/'),
+    'url' => env('APP_URL', 'http://10.159.191.117/cyber/public/'),
 
-    'asset_url' => env('APP_DEBUG', false)
-        ? 'http://127.0.0.1:8000/'
-        : env('APP_ASSET_URL', 'http://10.159.191.117/cyber/public/'),
+    'asset_url' => env('APP_ASSET_URL', 'http://10.159.191.117/cyber/public/'),
 
     /*
     |--------------------------------------------------------------------------

@@ -94,7 +94,6 @@
             <tr>
                 <th>Suspect Role</th>
                 <td colspan="3">{{ $accusedProfile->accused_role }}</td>
-
             </tr>
 
             <!-- Bank Transactions -->

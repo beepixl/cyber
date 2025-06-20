@@ -1,0 +1,279 @@
+{
+    "categories": [
+      {
+        "name": "Cyber Tools",
+        "items": [
+          {
+            "name": "OSINT Framework",
+            "url": "https://osintframework.com/",
+            "iconLink": "images/osintframework.png"
+          },
+          {
+            "name": "Cyber Weapons Lab",
+            "url": "https://null-byte.wonderhowto.com/collection/cyber-weapons-lab/",
+            "iconLink": "images/cyberweapons.png"
+          },
+          {
+            "name": "IntelTechniques Search Tool",
+            "url": "https://inteltechniques.com/tools/index.html",
+            "iconLink": "images/inteltechniques.png"
+          },
+          {
+            "name": "Intelligence X",
+            "url": "https://intelx.io/",
+            "iconLink": "images/intelligencex.png"
+          },
+          {
+            "name": "urlDNA",
+            "url": "https://urldna.io/",
+            "iconLink": "images/urldna.png"
+          },
+          {
+            "name": "Web Check",
+            "url": "https://web-check.xyz/",
+            "iconLink": "images/webcheck.png"
+          },
+          {
+            "name": "Cybersecurity",
+            "url": "https://inventyourshit.com/hacking/",
+            "iconLink": "images/cybersecurity.png"
+          },
+          {
+            "name": "GitHub Hacker Engines",
+            "url": "https://github.com/edoardottt/awesome-hacker-search-engines",
+            "iconLink": "images/github.png"
+          },
+          {
+            "name": "Kali Linux",
+            "url": "https://github.com/topics/kali-linux",
+            "iconLink": "images/kalilinux.png"
+          },
+          {
+            "name": "Cleanup Pictures",
+            "url": "https://cleanup.pictures/",
+            "iconLink": "images/cleanuppictures.png"
+          },
+          {
+            "name": "DOCS-TECH Hacking",
+            "url": "https://lira.epac.to/DOCS-TECH/Hacking/",
+            "iconLink": "images/hackingdocs.png"
+          },
+          {
+            "name": "Untools",
+            "url": "https://untools.co/",
+            "iconLink": "images/untools.png"
+          },
+          {
+            "name": "TinEye Search",
+            "url": "https://www.tineye.com/",
+            "iconLink": "images/tineye.png"
+          }
+        ]
+      },
+      {
+        "name": "Cyber",
+        "items": [
+          {
+            "name": "NCCRP",
+            "url": "https://cyberpolice.nic.in/",
+            "iconLink": "images/cyberpolice.png"
+          },
+          {
+            "name": "Cyber Yodha",
+            "url": "https://guru.cyberyodha.org/dashboard#",
+            "iconLink": "images/cyberyodha.png"
+          },
+          {
+            "name": "ICJS",
+            "url": "https://icjs.gov.in/ICJS/login",
+            "iconLink": "images/icjs.png"
+          },
+          {
+            "name": "eSakshya",
+            "url": "https://icjs.gov.in/esakshya/",
+            "iconLink": "images/esakshya.png"
+          },
+          {
+            "name": "CERT-In",
+            "url": "https://www.cert-in.org.in/",
+            "iconLink": "images/certin.png"
+          },
+          {
+            "name": "Cytrain",
+            "url": "https://cytrain.ncrb.gov.in/",
+            "iconLink": "images/cytrain.png"
+          },
+          {
+            "name": "Cyber Aashvast",
+            "url": "https://gujaratcybercrime.org/eaglebravo/",
+            "iconLink": "images/cyberaashvast.png"
+          },
+          {
+            "name": "CyberSafe",
+            "url": "https://cybersafe.gov.in/",
+            "iconLink": "images/cybersafe.png"
+          },
+          {
+            "name": "LEA WhatsApp",
+            "url": "https://www.whatsapp.com/records/login/",
+            "iconLink": "images/whatsapp.png"
+          },
+          {
+            "name": "LEA Facebook",
+            "url": "https://www.facebook.com/records/login/",
+            "iconLink": "images/facebook.png"
+          },
+          {
+            "name": "Google LERS",
+            "url": "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Flers.google.com%2F",
+            "iconLink": "images/google.png"
+          }
+        ]
+      },
+      {
+        "name": "Others",
+        "items": [
+          {
+            "name": "Gmail",
+            "url": "https://mail.google.com/mail/?shva=1#inbox",
+            "iconLink": "images/gmail.png"
+          },
+          {
+            "name": "Outlook",
+            "url": "https://webmail.gujarat.gov.in/owa/",
+            "iconLink": "images/outlook.png"
+          },
+          {
+            "name": "Karmyogi",
+            "url": "https://karmyogi.gujarat.gov.in/",
+            "iconLink": "images/karmyogi.png"
+          },
+          {
+            "name": "Eklavya",
+            "url": "https://brahmastra.today/admin/dashboard",
+            "iconLink": "images/eklavya.png"
+          },
+          {
+            "name": "Investigation Camp",
+            "url": "https://www.investigationcamp.com/",
+            "iconLink": "images/investigationcamp.png"
+          },
+          {
+            "name": "Kodex",
+            "url": "https://app.kodexglobal.com/gujarat-state-police,-india/requests",
+            "iconLink": "images/kodex.png"
+          },
+          {
+            "name": "IP Info",
+            "url": "https://ipinfo.io/",
+            "iconLink": "images/ipinfo.png"
+          },
+          {
+            "name": "IP Tracker",
+            "url": "https://tracker.iplocation.net/",
+            "iconLink": "images/iptracker.png"
+          },
+          {
+            "name": "Whois IP",
+            "url": "https://www.whois.com/whois/",
+            "iconLink": "images/whois.png"
+          },
+          {
+            "name": "User Search",
+            "url": "https://www.usersearch.org/",
+            "iconLink": "images/usersearch.png"
+          },
+          {
+            "name": "Google Maps",
+            "url": "https://www.google.com/maps/d/",
+            "iconLink": "images/mymaps.png"
+          },
+          {
+            "name": "CEIR",
+            "url": "https://www.ceir.gov.in/General/index.jsp",
+            "iconLink": "images/ceir.png"
+          },
+          {
+            "name": "eGujcop",
+            "url": "https://egujcop.gujarat.gov.in/hdiits/",
+            "iconLink": "images/egujcop.png"
+          },
+          {
+            "name": "Translate",
+            "url": "https://translate.google.com/",
+            "iconLink": "images/translate.png"
+          },
+          {
+            "name": "Case Status",
+            "url": "https://hcservices.ecourts.gov.in/ecourtindiaHC/cases/case_no.php",
+            "iconLink": "images/casestatus.png"
+          },
+          {
+            "name": "Merge PDF",
+            "url": "https://www.ilovepdf.com/merge_pdf",
+            "iconLink": "images/mergepdf.png"
+          },
+          {
+            "name": "PDF to Excel",
+            "url": "https://www.ilovepdf.com/pdf_to_excel",
+            "iconLink": "images/pdftoexcel.png"
+          },
+          {
+            "name": "Gujarat Police",
+            "url": "https://police.gujarat.gov.in/dgp/CMS.aspx?content_id=34712",
+            "iconLink": "images/gujaratpolice.png"
+          },
+          {
+            "name": "Citizen Portal",
+            "url": "https://gujhome.gujarat.gov.in/portal/webHP",
+            "iconLink": "images/citizenportal.png"
+          },
+          {
+            "name": "Indian Express",
+            "url": "https://indianexpress.com/express-plus/today-newsstand/",
+            "iconLink": "images/indianexpress.png"
+          },
+          {
+            "name": "Telegram Web",
+            "url": "https://web.telegram.org/",
+            "iconLink": "images/telegram.png"
+          },
+          {
+            "name": "IASbaba",
+            "url": "https://iasbaba.com/",
+            "iconLink": "images/iasbaba.png"
+          },
+          {
+            "name": "TAFCOP",
+            "url": "https://tafcop.sancharsaathi.gov.in/telecomUser/loginPage",
+            "iconLink": "images/tafcop.png"
+          },
+          {
+            "name": "Gujarat HC Case Search",
+            "url": "https://gujarathc-casestatus.nic.in/gujarathc/",
+            "iconLink": "images/gujarathc.png"
+          },
+          {
+            "name": "Sanchar Saathi",
+            "url": "https://sancharsaathi.gov.in/",
+            "iconLink": "images/sancharsaathi.png"
+          },
+          {
+            "name": "Instant IP Lookup",
+            "url": "https://whatismyipaddress.com/ip-lookup",
+            "iconLink": "images/iplookup.png"
+          },
+          {
+            "name": "Voters Services",
+            "url": "https://electoralsearch.eci.gov.in/",
+            "iconLink": "images/votersportal.png"
+          },
+          {
+            "name": "Hexillion",
+            "url": "https://hexillion.com/",
+            "iconLink": "images/hexillion.png"
+          }
+        ]
+      }
+    ]
+  }

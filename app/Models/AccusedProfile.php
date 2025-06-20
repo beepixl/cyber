@@ -51,6 +51,8 @@ class AccusedProfile extends Model implements HasMedia
         'accused_role',
         'created_by',
         'status',
+        'disputed_amount',
+        'layer',
     ];
 
     protected $casts = [

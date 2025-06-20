@@ -116,6 +116,7 @@ class AccusedProfileResource extends Resource
                         ->numeric()
                         ->prefix('₹')
                         ->label('Disputed Amount'),
+                    TextInput::make('layer')->label('Layer'),
                     TextInput::make('compliant_person')->label('Victim Name'),
 
                     // Select::make('created_by')
@@ -315,6 +316,7 @@ class AccusedProfileResource extends Resource
                     ->money('INR')
                     ->label('Disputed Amount')
                     ->sortable(),
+                TextColumn::make('layer')->label('Layer')->searchable(),
 
             ])
             ->filters([

@@ -33,7 +33,7 @@
 
         .section-header {
             background-color: white;
-            
+
             font-weight: bold;
             color: #000000;
         }
@@ -55,6 +55,9 @@
             <tr>
                 <td colspan="4" class="section-header">
                     <h4>Suspect Profile - {{ $accusedProfile->name }} </h4>
+                    @if (!empty($accusedProfile->status))
+                        <p>{{ $accusedProfile->status }}</p>
+                    @endif
                 </td>
             </tr>
             <!-- Case Information -->
@@ -75,6 +78,16 @@
             <tr>
                 <th>Fraud Amount</th>
                 <td>₹{{ number_format($accusedProfile->fraud_amount, 2) }}</td>
+                <th>Disputed Amount</th>
+                <td>₹{{ number_format($accusedProfile->disputed_amount, 2) }}</td>
+            </tr>
+            <tr>
+                <th>Layer</th>
+                <td>
+                    @if (!empty($accusedProfile->layer))
+                        Layer {{ $accusedProfile->layer }}
+                    @endif
+                </td>
                 <th>Victim Name</th>
                 <td>{{ $accusedProfile->compliant_person }}</td>
             </tr>

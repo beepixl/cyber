@@ -139,7 +139,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             <!-- Personal Info -->
             <tr>
                 <th>Full Name </th>
-                <td>{{ $accusedProfile->name }}</td>
+                <td style="width:60%">{{ $accusedProfile->name }}</td>
                 <th>Date of Birth </th>
                 <td>{{ date('d-m-Y', strtotime($accusedProfile->date_of_birth)) }}</td>
             </tr>
@@ -148,8 +148,25 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
                 <th>Photos</th>
                 <td colspan="3">
                     @foreach ($accusedProfile->getMedia() as $media)
-                        <img src="{{ $media->getUrl() }}" alt="Photo" style="max-width: 300px; height: auto;">
+                        <img src="{{ $media->getUrl() }}" alt="Photo"
+                            style="max-width: 300px; height: auto;max-height:100px;">
                     @endforeach
+                    @php
+                        $mapLinks = collect($accusedProfile->locations ?? [])
+                            ->pluck('map_link')
+                            ->filter()
+                            ->unique();
+                    @endphp
+                    @if ($mapLinks->isNotEmpty())
+
+                        @foreach ($mapLinks as $index => $mapLink)
+                            @php
+                                echo QrCode::size(100)->generate($mapLink);
+
+                            @endphp
+                        @endforeach
+
+                    @endif
                 </td>
             </tr>
 
@@ -164,7 +181,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
                                 <th>State</th>
                                 <th>Remarks</th>
                                 <th>From Where</th>
-                                <th>Map Link</th>
+                                {{-- <th>Map Link</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -176,13 +193,13 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
                                     <td>{{ $loc['state'] }}</td>
                                     <td>{{ $loc['remarks'] }}</td>
                                     <td>{{ $loc['from_where'] }} </td>
-                                    <td>
+                                    {{-- <td>
                                         @if (!empty($loc['map_link']))
                                             @php
                                                 echo QrCode::generate($loc['map_link']);
                                             @endphp
                                         @endif
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -191,19 +208,30 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             </tr>
             <!-- Identification -->
 
-            <tr>
-                <th>Aadhar Number</th>
-                <td>{{ $accusedProfile->aadhar_number }}</td>
+            @php
+                $hasAadhar = !empty($accusedProfile->aadhar_number);
+                $hasPan = !empty($accusedProfile->pan_number);
+            @endphp
 
-                <th>PAN Number</th>
-                <td>{{ $accusedProfile->pan_number }}</td>
-            </tr>
-            <tr>
-                <th>GSTIN</th>
-                <td>{{ $accusedProfile->gstin }}</td>
-                <td></td>
-                <td></td>
-            </tr>
+            @if ($hasAadhar && $hasPan)
+                <tr>
+                    <th>Aadhar Number</th>
+                    <td>{{ $accusedProfile->aadhar_number }}</td>
+                    <th>PAN Number</th>
+                    <td>{{ $accusedProfile->pan_number }}</td>
+                </tr>
+            @elseif ($hasAadhar)
+                <tr>
+                    <th>Aadhar Number</th>
+                    <td colspan="3">{{ $accusedProfile->aadhar_number }}</td>
+                </tr>
+            @elseif ($hasPan)
+                <tr>
+                    <th>PAN Number</th>
+                    <td colspan="3">{{ $accusedProfile->pan_number }}</td>
+                </tr>
+            @endif
+
 
 
 
@@ -211,85 +239,103 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
             <!-- Contact Information -->
-            <tr>
-                <td colspan="4">
-                    <strong>Mobile Numbers</strong>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mobile</th>
-                                <th>Remarks</th>
-                                <th>From Where</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($accusedProfile->mobile_numbers ?? [] as $mob)
+            @if (!empty($accusedProfile->mobile_numbers) && count($accusedProfile->mobile_numbers) > 0)
+                <tr>
+                    <td colspan="4">
+                        <strong>Mobile Numbers</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>{{ $mob['mobile'] }}</td>
-                                    <td>{{ $mob['remarks'] }}</td>
-                                    <td>{{ $mob['from_where'] }}</td>
+                                    <th>Mobile</th>
+                                    <th>Remarks</th>
+                                    <th>From Where</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <strong>Email Addresses</strong>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Remarks</th>
-                                <th>From Where</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($accusedProfile->email_addresses ?? [] as $email)
+                            </thead>
+                            <tbody>
+                                @foreach ($accusedProfile->mobile_numbers as $mob)
+                                    <tr>
+                                        <td>{{ $mob['mobile'] }}</td>
+                                        <td>{{ $mob['remarks'] }}</td>
+                                        <td>{{ $mob['from_where'] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            @endif
+            @if (!empty($accusedProfile->email_addresses) && count($accusedProfile->email_addresses) > 0)
+                <tr>
+                    <td colspan="4">
+                        <strong>Email Addresses</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>{{ $email['email'] }}</td>
-                                    <td>{{ $email['remarks'] }}</td>
-                                    <td>{{ $email['from_where'] }}</td>
+                                    <th>Email</th>
+                                    <th>Remarks</th>
+                                    <th>From Where</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($accusedProfile->email_addresses as $email)
+                                    <tr>
+                                        <td>{{ $email['email'] }}</td>
+                                        <td>{{ $email['remarks'] }}</td>
+                                        <td>{{ $email['from_where'] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            @endif
 
             <!-- Locations -->
 
 
 
-            @if (count($accusedProfile->social_media_profiles) > 0)
+            @php
+                $hasValidSocialUrls = false;
+                if (
+                    !empty($accusedProfile->social_media_profiles) &&
+                    is_array($accusedProfile->social_media_profiles)
+                ) {
+                    foreach ($accusedProfile->social_media_profiles as $social) {
+                        if (!empty($social['url'])) {
+                            $hasValidSocialUrls = true;
+                            break;
+                        }
+                    }
+                }
+            @endphp
+            @if ($hasValidSocialUrls)
+                <tr>
+                    <td colspan="4">
+                        <strong>Social Media Profiles</strong>
+                    </td>
+                </tr>
                 <tr>
                     <th>Platform</th>
                     <th colspan="3">Profile Link</th>
-
                 </tr>
-
-                <!-- Family Members -->
-
-                @foreach ($accusedProfile->social_media_profiles ?? [] as $social)
+                @foreach ($accusedProfile->social_media_profiles as $social)
                     <tr>
-                        <td>{{ $social['platform'] }}</td>
-                        <td colspan="3"><a href="{{ $social['url'] }}" target="_blank">{{ $social['url'] }}</a>
+                        <td>{{ $social['platform'] ?? '' }}</td>
+                        <td colspan="3">
+                            @if (!empty($social['url']))
+                                <a href="{{ $social['url'] }}" target="_blank">{{ $social['url'] }}</a>
+                            @endif
                         </td>
-
                     </tr>
                 @endforeach
-
             @endif
 
             @if ($accusedProfile->familyMembers->count() > 0)
@@ -330,22 +376,29 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             @endif
             <!-- Additional Info -->
 
-            <tr>
-                <th colspan="4">Additional Information</th>
-            </tr>
-            <tr>
-                <td colspan="4">{{ $accusedProfile->bio }}</td>
-            </tr>
-            <tr>
-                <th colspan="4">Analysis</th>
-            </tr>
-            <tr>
-                <td colspan="4">{{ $accusedProfile->additional_info }}</td>
-            </tr>
+            @if (!empty($accusedProfile->bio) || !empty($accusedProfile->additional_info))
+                <tr>
+                    <th colspan="4">Additional Information</th>
+                </tr>
+            @endif
+            @if (!empty($accusedProfile->bio))
+                <tr>
+                    <td colspan="4">{{ $accusedProfile->bio }}</td>
+                </tr>
+            @endif
+            @if (!empty($accusedProfile->additional_info))
+                <tr>
+                    <th colspan="4">Analysis</th>
+                </tr>
+
+                <tr>
+                    <td colspan="4">{{ $accusedProfile->additional_info }}</td>
+                </tr>
+            @endif
             @if (!empty($accusedProfile->cdr_analysis))
                 <tr>
-                    <td colspan="4" class="section-header">
-                        <h4>CDR Analysis</h4>
+                    <td colspan="4">
+                        <strong>CDR Analysis</strong>
                     </td>
                 </tr>
                 <tr>

@@ -13,6 +13,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -151,7 +152,7 @@ class BankTransactionsRelationManager extends RelationManager
                     ->icon('heroicon-o-printer')
                     ->url(fn ($record) => route('print-bank-pdf', ['record' => $record->id]))
                     ->openUrlInNewTab(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
 
                 Tables\Actions\BulkActionGroup::make([

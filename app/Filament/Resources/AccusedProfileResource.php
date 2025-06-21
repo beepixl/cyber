@@ -223,7 +223,7 @@ class AccusedProfileResource extends Resource
                 ->schema([
                     TextInput::make('aadhar_number')->label('AADHAR No.'),
                     TextInput::make('pan_number')->label('PAN No.'),
-                    TextInput::make('gstin')->label('GSTIN'),
+                    // TextInput::make('gstin')->label('GSTIN'),
                 ])
                 ->columns(3)->visible(fn (string $operation) => $operation !== 'create'),
 

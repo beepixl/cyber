@@ -1,3 +1,6 @@
+<?php
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,6 +164,7 @@
                                 <th>State</th>
                                 <th>Remarks</th>
                                 <th>From Where</th>
+                                <th>Map Link</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -171,7 +175,14 @@
                                     <td>{{ $loc['district'] }}</td>
                                     <td>{{ $loc['state'] }}</td>
                                     <td>{{ $loc['remarks'] }}</td>
-                                    <td>{{ $loc['from_where'] }}</td>
+                                    <td>{{ $loc['from_where'] }} </td>
+                                    <td>
+                                        @if (!empty($loc['map_link']))
+                                            @php
+                                                echo QrCode::generate($loc['map_link']);
+                                            @endphp
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -331,6 +342,37 @@
             <tr>
                 <td colspan="4">{{ $accusedProfile->additional_info }}</td>
             </tr>
+            @if (!empty($accusedProfile->cdr_analysis))
+                <tr>
+                    <td colspan="4" class="section-header">
+                        <h4>CDR Analysis</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>B Party Name</th>
+                                    <th>Mobile Number</th>
+                                    <th>Address</th>
+                                    <th>Other Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($accusedProfile->cdr_analysis as $cdr)
+                                    <tr>
+                                        <td>{{ $cdr['B Party Name'] ?? '' }}</td>
+                                        <td>{{ $cdr['Mobile Number'] ?? '' }}</td>
+                                        <td>{{ $cdr['Address'] ?? '' }}</td>
+                                        <td>{{ $cdr['Other Info'] ?? '' }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            @endif
         </tbody>
     </table>
 

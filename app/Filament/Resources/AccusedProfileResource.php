@@ -213,6 +213,7 @@ class AccusedProfileResource extends Resource
                                 ]),
                             TextInput::make('remarks')->label('Remarks'),
                             TextInput::make('from_where')->label('From Where?'),
+                            TextInput::make('map_link')->label('Map Link'),
                         ])->columns(3),
 
                 ])
@@ -285,6 +286,20 @@ class AccusedProfileResource extends Resource
                 ])
                 ->columns(3)->visible(fn (string $operation) => $operation !== 'create'),
 
+            Section::make('Cdr Analysis')
+                ->schema([
+
+                    Repeater::make('cdr_analysis')
+                        ->schema([
+                            TextInput::make('B Party Name'),
+                            TextInput::make('Mobile Number'),
+                            TextInput::make('Address'),
+                            TextInput::make('Other Info'),
+
+                        ])->columns(2),
+
+                ])
+                ->visible(fn (string $operation) => $operation !== 'create'),
             // Section::make('Business Details')
             //     ->schema([
             //         TextInput::make('business_name'),

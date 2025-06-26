@@ -52,9 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://10.159.191.117/cyber/public/'),
+    // 'url' => env('APP_URL', 'http://10.159.191.117/cyber/public/'),
 
-    'asset_url' => env('APP_ASSET_URL', 'http://10.159.191.117/cyber/public/'),
+    // 'asset_url' => env('APP_ASSET_URL', 'http://10.159.191.117/cyber/public/'),
 
     /*
     |--------------------------------------------------------------------------

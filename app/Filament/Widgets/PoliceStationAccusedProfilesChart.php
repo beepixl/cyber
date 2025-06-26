@@ -83,7 +83,7 @@ class PoliceStationAccusedProfilesChart extends ChartWidget
                         const chartElement = elements[0];
                         const label = this.data.labels[chartElement.index];
                         if (label) {
-                            window.location.href = `/admin/accused-profiles?tableFilters[police_station][value]=` + encodeURIComponent(label);
+                            window.location.href = `http://10.159.191.117/cyber/public/admin/accused-profiles?tableFilters[police_station][value]=` + encodeURIComponent(label);
                         }
                     }
                 }

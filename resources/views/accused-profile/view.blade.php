@@ -383,7 +383,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             @endif
             @if (!empty($accusedProfile->bio))
                 <tr>
-                    <td colspan="4">{{ $accusedProfile->bio }}</td>
+                    <td colspan="4">{!! nl2br(e($accusedProfile->bio)) !!}</td>
                 </tr>
             @endif
             @if (!empty($accusedProfile->additional_info))
@@ -392,7 +392,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
                 </tr>
 
                 <tr>
-                    <td colspan="4">{{ $accusedProfile->additional_info }}</td>
+                    <td colspan="4">{!! nl2br(e($accusedProfile->additional_info)) !!}</td>
                 </tr>
             @endif
             @if (!empty($accusedProfile->cdr_analysis))

@@ -59,4 +59,11 @@ class CyberCase extends Model
         return $this->belongsToMany(User::class, 'users')
             ->withTimestamps();
     }
+
+    public function policeStation()
+    {
+        // 'police_station' in CyberCase is the police station name, not the id.
+        // So we need to match 'name' in PoliceStation, not 'id'.
+        return $this->belongsTo(\App\Models\PoliceStation::class, 'police_station', 'name');
+    }
 }

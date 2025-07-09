@@ -25,7 +25,9 @@ class PrintBankTransaction extends Page
         $options->set('isPhpEnabled', true);
         $dompdf = new Dompdf($options);
 
-        $case = BankTransaction::find($record);
+        $case = BankTransaction::with('case')->find($record);
+      
+
 
         if ($case->info_type == 'Instagram') {
             $html = view('print-instagram-pdf', [
@@ -36,6 +38,8 @@ class PrintBankTransaction extends Page
                 'case' => $case, // Fetch all cases or specific data
             ])->render();
         }
+
+      //  return $html;
 
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');

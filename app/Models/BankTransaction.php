@@ -51,6 +51,9 @@ class BankTransaction extends Model
     // Optional: Define relationship to a Case model
     public function case()
     {
-        return $this->belongsTo(CaseModel::class, 'case_id', 'case_id');
+        return $this->belongsTo(CyberCase::class, 'acknowledgement_no', 'acknowledgement_no')->with('policeStation');
     }
+
+    // Relationship: BankTransaction belongs to PoliceStation via police_station_id
+
 }

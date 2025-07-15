@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Resources\CrimeRecordCardResource\Pages\PrintCrimeRecordCard;
 use App\Filament\Resources\CyberCaseResource\Pages\PrintBankTransaction;
 use App\Filament\Resources\CyberCaseResource\Pages\PrintCyberCase;
 use App\Http\Controllers\AccusedProfileController;
@@ -23,3 +24,4 @@ Route::get('/bank-transactions/print/{record}', [PrintBankTransaction::class, 'g
 Route::get('/reports/view', [ReportController::class, 'view'])->name('reports.view');
 Route::get('/transactions/tree/{acknowledgement_no}', [ReportController::class, 'showTransactionTree']);
 Route::get('/accused-profiles/{accusedProfile}', [AccusedProfileController::class, 'show'])->name('accused-profiles.show');
+Route::get('/crime-record-cards/print/{record}', [PrintCrimeRecordCard::class, 'generatePdf'])->name('print-crime-record-card-pdf');

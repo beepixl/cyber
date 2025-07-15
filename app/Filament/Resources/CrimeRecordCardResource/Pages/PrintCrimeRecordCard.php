@@ -20,30 +20,29 @@ class PrintCrimeRecordCard extends Page
             'record' => $crimeRecordCard,
         ])->render();
 
+        return $html;
 
-
-
-        $mpdf = new \Mpdf\Mpdf([
-            'mode' => 'utf-8',
-            'format' => 'A4-L',
-            'tempDir' => storage_path('app/mpdf-temp'),
-            'fontDir' => [
-                base_path('public/fonts/gujfonts'),
-                base_path('public/fonts/Roboto/static'),
-            ],
-            'fontdata' => [
-                'gujarati' => [
-                    'R' => 'Shruti-Font.ttf', // make sure this font is valid and installed
-                ],
-                'roboto' => [
-                    'R' => 'Roboto-Regular.ttf',
-                    'B' => 'Roboto-Bold.ttf',
-                    'I' => 'Roboto-Italic.ttf',
-                    'BI' => 'Roboto-BoldItalic.ttf',
-                ],
-            ],
-            'default_font' => 'roboto',
-        ]);
+        // $mpdf = new \Mpdf\Mpdf([
+        //     'mode' => 'utf-8',
+        //     'format' => 'A4-L',
+        //     'tempDir' => storage_path('app/mpdf-temp'),
+        //     'fontDir' => [
+        //         base_path('public/fonts/gujfonts'),
+        //         base_path('public/fonts/Roboto/static'),
+        //     ],
+        //     'fontdata' => [
+        //         'gujarati' => [
+        //             'R' => 'Shruti-Font.ttf', // make sure this font is valid and installed
+        //         ],
+        //         'roboto' => [
+        //             'R' => 'Roboto-Regular.ttf',
+        //             'B' => 'Roboto-Bold.ttf',
+        //             'I' => 'Roboto-Italic.ttf',
+        //             'BI' => 'Roboto-BoldItalic.ttf',
+        //         ],
+        //     ],
+        //     'default_font' => 'roboto',
+        // ]);
 
         $mpdf->WriteHTML('
             <style>

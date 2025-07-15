@@ -23,6 +23,7 @@ class CrimeRecordCardResource extends Resource
                 Forms\Components\TextInput::make('police_station_name')->label('Police Station Name (પોલીસ સ્ટેશનનું નામ)'),
                 Forms\Components\TextInput::make('name')->label('1. Name (નામ)'),
                 Forms\Components\TextInput::make('alias')->label('2. Alias (ઉપનામ)'),
+                Forms\Components\TextInput::make('alias')->label('3. Age (ઉંમર)'),
                 Forms\Components\TextInput::make('fp_classification')->label('3. FP Classification (ફિંગરપ્રિન્ટ વર્ગીકરણ)'),
                 Forms\Components\TextInput::make('place_of_birth')->label('4. Place of Birth (જન્મસ્થળ)'),
                 Forms\Components\TextInput::make('height')->label('5. Height (ઊંચાઈ)'),

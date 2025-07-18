@@ -47,6 +47,15 @@ class AccusedProfileResource extends Resource
         return $form->schema([
             Section::make('Case Information')
                 ->schema([
+
+                    Select::make('profile_status')
+                        ->options([
+                            'Incomplete' => 'Incomplete',
+                            'Team Sent' => 'Team Sent',
+                            'Complete' => 'Complete',
+                            'Not Found' => 'Not Found',
+                            'Absconder' => 'Absconder',
+                        ]),
                     TextInput::make('status')->label('Status'),
                     Select::make('police_station')
                         ->options([
@@ -317,24 +326,45 @@ class AccusedProfileResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->label('Suspect Name')->searchable(),
-                TextColumn::make('status')->label('Status')->searchable(),
+                TextColumn::make('profile_status')
+                    ->label('Status')
+                    ->searchable()
+                    ->color(fn ($state) => match ($state) {
+                        'Complete' => 'success',
+                        'Team Sent' => 'warning',
+                        'Incomplete' => 'info',
+                        'Not Found' => 'gray',
+                        'Absconder' => 'danger',
+                        default => 'secondary',
+                    }),
                 TextColumn::make('police_station')->label('Police Station')->searchable(),
                 TextColumn::make('fir_no')->label('Fir No')->searchable(),
                 TextColumn::make('state')->searchable(),
                 TextColumn::make('city')->label('City')->searchable(),
-                TextColumn::make('compliant_person')->label('Complaint Person')->searchable(),
+                TextColumn::make('layer')->label('Layer')->searchable(),
+                TextColumn::make('disputed_amount')
+                ->money('INR')
+                ->label('Disputed Amount')
+                ->sortable(),
+
+
+           //     TextColumn::make('compliant_person')->label('Complaint Person')->searchable(),
                 TextColumn::make('fraud_amount')
                     ->money('INR')
                     ->label('Fraud Amount')
                     ->sortable(),
-                TextColumn::make('disputed_amount')
-                    ->money('INR')
-                    ->label('Disputed Amount')
-                    ->sortable(),
-                TextColumn::make('layer')->label('Layer')->searchable(),
-
+             
             ])
             ->filters([
+                SelectFilter::make('profile_status')
+                    ->label('Profile Status')
+                    ->options([
+                        'Incomplete' => 'Incomplete',
+                        'Team Sent' => 'Team Sent',
+                        'Complete' => 'Complete',
+                        'Not Found' => 'Not Found',
+                        'Absconder' => 'Absconder',
+                    ]),
                 SelectFilter::make('police_station')
                     ->label('Police Station')
                     ->options(fn () => AccusedProfile::query()

@@ -64,6 +64,10 @@
              border: none !important;
          }
 
+         .col-10 {
+             width: 10%;
+         }
+
          .col-20 {
              width: 20%;
          }
@@ -108,7 +112,7 @@
              </tr>
 
              <tr>
-                 <td class="col-20">
+                 <td class="col-10">
                      1. Name:
                      @if (!empty($record->name))
                          <span style="margin-left: 10px;"> <strong>{{ $record->name }}</strong></span>
@@ -147,12 +151,13 @@
              </tr>
 
              <tr>
-                 <td class="col-20" rowspan="2">
+                 <td class="col-10" rowspan="2">
                      2. Alias:
                      <br><span class="gujarati-text">૨. ઉપનામ</span><br>
                      @if (!empty($record->alias))
                          <span style="margin-left: 10px;"> <strong>{{ $record->alias }}</strong>
                      @endif
+                     <br />
                      Age: @if (!empty($record->age))
                          <span style="margin-left: 10px;"> <strong>{{ $record->age }}</strong>
                      @endif
@@ -203,7 +208,7 @@
              </tr>
 
              <tr style="border-bottom:1px solid black">
-                 <td class="col-20">
+                 <td class="col-10">
                      3. F.P. Classification<br><span class="gujarati-text">૩. અંગુલીછાપા વર્ગીકરણ</span><br>
                      <strong>{{ $record->fp_classification }}</strong>
                  </td>
@@ -327,8 +332,8 @@
      </div>
 
      <div style="page-break-after: always;"></div>
-
-     <table class="table table-bordered mt-4 mb-0 w-100" style="border-top:1px solid black !important">
+     <br><br>
+     <table class="table table-bordered mt-40 mb-0 w-100" style="border-top:1px solid black !important">
          <tr>
              <td class="col-20">
                  M.O.<br><br><br>

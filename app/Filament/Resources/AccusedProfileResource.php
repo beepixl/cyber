@@ -50,11 +50,12 @@ class AccusedProfileResource extends Resource
 
                     Select::make('profile_status')
                         ->options([
+                            'Complete' => 'Complete',
                             'Incomplete' => 'Incomplete',
                             'Team Sent' => 'Team Sent',
-                            'Complete' => 'Complete',
                             'Not Found' => 'Not Found',
                             'Absconder' => 'Absconder',
+
                         ]),
                     TextInput::make('status')->label('Status'),
                     Select::make('police_station')
@@ -343,27 +344,27 @@ class AccusedProfileResource extends Resource
                 TextColumn::make('city')->label('City')->searchable(),
                 TextColumn::make('layer')->label('Layer')->searchable(),
                 TextColumn::make('disputed_amount')
-                ->money('INR')
-                ->label('Disputed Amount')
-                ->sortable(),
+                    ->money('INR')
+                    ->label('Disputed Amount')
+                    ->sortable(),
 
-
-           //     TextColumn::make('compliant_person')->label('Complaint Person')->searchable(),
+                //     TextColumn::make('compliant_person')->label('Complaint Person')->searchable(),
                 TextColumn::make('fraud_amount')
                     ->money('INR')
                     ->label('Fraud Amount')
                     ->sortable(),
-             
+
             ])
             ->filters([
                 SelectFilter::make('profile_status')
                     ->label('Profile Status')
                     ->options([
+                        'Complete' => 'Complete',
                         'Incomplete' => 'Incomplete',
                         'Team Sent' => 'Team Sent',
-                        'Complete' => 'Complete',
                         'Not Found' => 'Not Found',
                         'Absconder' => 'Absconder',
+
                     ]),
                 SelectFilter::make('police_station')
                     ->label('Police Station')

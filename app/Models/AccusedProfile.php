@@ -54,6 +54,7 @@ class AccusedProfile extends Model implements HasMedia
         'disputed_amount',
         'layer',
         'cdr_analysis',
+        'profile_status',
     ];
 
     protected $casts = [

@@ -68,6 +68,10 @@
              width: 10%;
          }
 
+         .col-15 {
+             width: 15%;
+         }
+
          .col-20 {
              width: 20%;
          }
@@ -93,10 +97,10 @@
          <table class="table">
              <tr style="border-bottom: 1px solid black">
                  <td class="col-20 no-border">
-                     <h3> G.P. Rjt., Sr. 72 Std.-119 3-2016 1,00,000 PA4*<br>
-                         H.D., Memo No. PBQ-1067-4499-c dt.4-5-73</h3>
+                     <h4> G.P. Rjt., Sr. 72 Std.-119 3-2016 1,00,000 PA4*<br>
+                         H.D., Memo No. PBQ-1067-4499-c dt.4-5-73</h4>
                  </td>
-                 <td class="header col-20" colspan="3">
+                 <td class="header" colspan="3">
                      <h3>CRIME RECORD CARD<br>
                          <span class="gujarati-text">મુખ્‍ય ગુના નોંધણી કાર્ડ</span>
                          <br>Navsari Police or Police Station: {{ $record->police_station_name }}
@@ -112,7 +116,7 @@
              </tr>
 
              <tr>
-                 <td class="col-10">
+                 <td class="col-15">
                      1. Name:
                      @if (!empty($record->name))
                          <span style="margin-left: 10px;"> <strong>{{ $record->name }}</strong></span>
@@ -141,7 +145,7 @@
                          <span style="margin-left: 10px;"><strong>{{ $record->complexion }}</strong></span>
                      @endif
                  </td>
-                 <td class="col-20 bl">
+                 <td class="col-15 bl">
                      14. Ref. No. of P. Stn.:<br>
                      <span class="gujarati-text">૧૪. પો.સ્ટે. રેફરન્સ નં.</span><br>
                      @if (!empty($record->red_no_of_p_stn))

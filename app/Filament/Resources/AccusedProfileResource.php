@@ -51,7 +51,7 @@ class AccusedProfileResource extends Resource
                     Select::make('profile_status')
                         ->options([
                             'Incomplete' => 'Incomplete',
-                            'Pending' => 'Pending',
+                            'Not Sent' => 'Not Sent',
                             'Complete' => 'Complete',
                             'Not Found' => 'Not Found',
                             'Asconder' => 'Asconder',
@@ -331,10 +331,10 @@ class AccusedProfileResource extends Resource
                     ->searchable()
                     ->color(fn ($state) => match ($state) {
                         'Complete' => 'success',
-                        'Pending' => 'warning',
-                        'Incomplete' => 'danger',
+                        'Not Sent' => 'warning',
+                        'Incomplete' => 'info',
                         'Not Found' => 'gray',
-                        'Asconder' => 'info',
+                        'Asconder' => 'danger',
                         default => 'secondary',
                     }),
                 TextColumn::make('police_station')->label('Police Station')->searchable(),
@@ -360,7 +360,7 @@ class AccusedProfileResource extends Resource
                     ->label('Profile Status')
                     ->options([
                         'Incomplete' => 'Incomplete',
-                        'Pending' => 'Pending',
+                        'Not Sent' => 'Not Sent',
                         'Complete' => 'Complete',
                         'Not Found' => 'Not Found',
                         'Asconder' => 'Asconder',

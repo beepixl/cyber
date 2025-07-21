@@ -84,7 +84,7 @@
             </td>
             <td style="border:none">
                 <h2>
-                    {{ strtoupper(($case->case->policeStation?->name ?? 'CYBER CRIME POLICE STATION NAVSARI') . ' CYBER CRIME POLICE STATION') }}
+                    {{ strtoupper(($case->case->policeStation?->name ?? 'NAVSARI') . ' CYBER CRIME POLICE STATION') }}
                 </h2>
                                           
                         {!! $case->case->policeStation?->address ?? 'Mota Bazar,Navsari–396445,Gujarat' !!}

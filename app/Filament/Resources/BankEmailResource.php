@@ -64,6 +64,17 @@ class BankEmailResource extends Resource
                     ->label('Filter by Bank'),
             ])
             ->actions([
+                Tables\Actions\Action::make('copy_emails')
+                ->label('Copy Emails')
+                ->icon('heroicon-s-clipboard-document-check')
+                ->action(function ($livewire, $record) {
+                    $livewire->dispatch('copyToClipboard', text: $record->emails);
+                  //  $livewire->notify('success', 'Emails copied to clipboard!');
+                })
+                ->color('secondary')
+                ->visible(fn ($record) => !empty($record->emails)),
+            
+            
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

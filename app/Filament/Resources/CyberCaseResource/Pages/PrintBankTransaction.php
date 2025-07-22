@@ -26,16 +26,22 @@ class PrintBankTransaction extends Page
         $dompdf = new Dompdf($options);
 
         $case = BankTransaction::with('case')->find($record);
-      
+        
+        $relatedBankTransactions = BankTransaction::where('outward_no', $case->outward_no)->get();
+
+        
 
 
         if ($case->info_type == 'Instagram') {
             $html = view('print-instagram-pdf', [
                 'case' => $case, // Fetch all cases or specific data
+                'relatedBankTransactions' => $relatedBankTransactions,
             ])->render();
         } else {
             $html = view('print-bank-pdf', [
-                'case' => $case, // Fetch all cases or specific data
+                'case' => $case, 
+                'relatedBankTransactions' => $relatedBankTransactions,
+                // Fetch all cases or specific data
             ])->render();
         }
 
@@ -45,6 +51,6 @@ class PrintBankTransaction extends Page
         $dompdf->setPaper('A4', 'portrait');
 
         $dompdf->render();
-        $dompdf->stream('cyber_cases.pdf', ['Attachment' => false]);
+        $dompdf->stream($case->outward_no . '.pdf', ['Attachment' => false]);
     }
 }

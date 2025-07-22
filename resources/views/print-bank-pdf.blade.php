@@ -119,15 +119,35 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ $case->info_type }}</th>
-                    <th>Other Details</th>
+                  
+                    <th>Account Number</th>
+                    <th>IFSC Code</th>
+                    <th>Transaction ID</th>
+                    @php
+                        $hasRemarks = $relatedBankTransactions->contains(function($transaction) {
+                            return !empty($transaction->remarks);
+                        });
+                    @endphp
+                    @if($hasRemarks)
+                        <th>Remarks</th>
+                    @endif
+                    
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{ $case->to_account_id }}</td>
-                    <td>{{ $case->ifsc_code }} {!! $case->remarks !!}</td>
-                </tr>
+              
+                @foreach ($relatedBankTransactions as $relatedBankTransaction)
+                    <tr>
+                       
+                        <td>{{ $relatedBankTransaction->to_account_id }}</td>
+                        <td>{{ $relatedBankTransaction->ifsc_code }}</td>
+                      
+                        <td>{{ $relatedBankTransaction->transaction_id_2 }}</td>
+                        @if($hasRemarks)
+                            <td>{!! $relatedBankTransaction->remarks !!}</td>
+                        @endif
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         <div>

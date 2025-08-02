@@ -81,7 +81,7 @@ class CyberCaseResource extends Resource
                             ->required(),
 
                         Forms\Components\TextInput::make('complainant_address'),
-                        Forms\Components\Select::make('police_station_id')
+                        Forms\Components\Select::make('police_station')
                             ->label('Police Station')
                             ->options(function () {
                                 return \App\Models\PoliceStation::pluck('name', 'name')->toArray();

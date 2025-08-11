@@ -31,6 +31,7 @@ class CrimeRecordCardResource extends Resource
                 Forms\Components\TextInput::make('build')->label('7. Build (શારીરિક બંધારણ)'),
                 Forms\Components\TextInput::make('eyes')->label('8. Eyes (આંખો)'),
                 Forms\Components\TextInput::make('hair')->label('9. Hair (વાળ)'),
+                Forms\Components\TextInput::make('occupation')->label('10. Occupation (ધંધો)'),
                 Forms\Components\TextInput::make('identification_marks')->label('11. Identification Marks (ઓળખના નિશાન)'),
                 Forms\Components\TextInput::make('religion_caste')->label('12. Religion/Caste (ધર્મ/જાતિ)'),
                 Forms\Components\TextInput::make('education')->label('13. Education (શિક્ષણ)'),
@@ -56,6 +57,7 @@ class CrimeRecordCardResource extends Resource
                     ->columns(5)
                     ->columnSpanFull()
                     ->visibleOn('edit'),
+                Forms\Components\Textarea::make('mo')->label('M.O.'),
                 Forms\Components\Textarea::make('relatives_friends')->label('23 .Relatives/Friends (સગા-સંબંધીઓ/મિત્રો)'),
                 Forms\Components\TextInput::make('father_name')->label('24. Father Name (પિતાનું નામ)'),
                 Forms\Components\TextInput::make('spouse_name')->label('25. Spouse Name (પત્ની/પતિનું નામ)'),

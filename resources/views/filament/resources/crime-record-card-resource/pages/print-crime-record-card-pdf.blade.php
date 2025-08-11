@@ -196,9 +196,9 @@
              </tr>
 
              <tr>
-                 <td class="col-20" colspan="3">
+                 <td class="col-20 bl" colspan="3">
                      10. Occupation:
-                     <span style="margin-left: 10px;"> <strong>{{ $record->education }}</strong></span>
+                     <span style="margin-left: 10px;"> <strong>{{ $record->occupation }}</strong></span>
                      <br><span class="gujarati-text">૧૦. ધંધો </span><br>
 
                      11. Marks and Peculiarieties<br>
@@ -223,7 +223,7 @@
                  <td class="col-20" colspan="2">
                      13. Education and Accomplishments<br>
                      <span class="gujarati-text">૧૩. શિક્ષણ અને નિપૂણતા</span><br>
-                     <strong>{{ $record->mo_classification }}</strong>
+                     <strong>{{ $record->education }}</strong>
                  </td>
                  <td class="col-20 bl">
                      19. Frequents of Stays at<br><span class="gujarati-text">૧૯. કયે સ્થળે વારંવાર આવે છે અથવા રહે છે.
@@ -266,7 +266,7 @@
              </tr>
 
              <tr>
-                 <td class="col-20" style="border:1px solid black !important">
+                 <td class="col-20 bl" style="border:1px solid black !important;border-left:none !important">
                      20. Movements and other information<br><span class="gujarati-text"> ૨૦. હિલચાલ અને બીજી
                          માહિતી</span><br>
                      <strong>{{ $record->movements_info }}</strong>
@@ -340,11 +340,11 @@
      <table class="table table-bordered mt-40 mb-0 w-100" style="border-top:1px solid black !important">
          <tr>
              <td class="col-20" style="height: 150px">
-                 M.O.<br><br><br>
+                 M.O.: {{ $record->mo }}<br><br><br>
                  28. Classification<br><span class="gujarati-text">૨૮. વર્ગીકરણ પધ્ધતિનું </span>:
                  <strong>{{ $record->mo_classification }}</strong>
              </td>
-             <td class="col-20 bl" colspan="4" rowspan="4" style="height: 450px">
+             <td class="col-20 bl" colspan="4" rowspan="4" style="height: 320px">
                  <div style="text-align:center !important;border-bottom: 1px solid black">29. General
                      Particulars<br><span class="gujarati-text">૨૯.
                          સામાન્ય
@@ -355,19 +355,19 @@
              </td>
 
          </tr>
-         <tr style="border-top:1px solid black !important;height: 100px">
+         <tr style="border-top:1px solid black !important;height: 70px">
              <td class="col-20">
                  30. Dress<br>૩૦. પોષાક:
                  <strong>{{ $record->dress_description }}</strong>
              </td>
          </tr>
-         <tr style="height: 100px">
+         <tr style="height: 70px">
              <td class="col-20">
                  31. Habits and Vices<br> ૩૧. ટેવો અને કૃત્યો:
                  <strong>{{ $record->habits_vices }}</strong>
              </td>
          </tr>
-         <tr style="height: 100px">
+         <tr style="height: 20px">
              <td class="col-20">
                  32. Sphere of Activity<br>૩૨. પ્રવૃત્તિનું ક્ષેત્રફળ:
                  <strong>{{ $record->sphere_of_activity }}</strong>

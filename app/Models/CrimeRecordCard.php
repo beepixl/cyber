@@ -47,6 +47,8 @@ class CrimeRecordCard extends Model
         'dist_mob_no',
         'cid_no',
         'frequents_of_stays_at',
+        'mo',
+        'occupation',
     ];
 
     protected $casts = [

@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Enums\ActionsPosition;
 
 class CrimeRecordCardResource extends Resource
 {
@@ -102,7 +103,7 @@ class CrimeRecordCardResource extends Resource
                     ->icon('heroicon-o-document')
                     ->url(fn ($record) => route('print-crime-record-card-pdf', ['record' => $record->id]))
                     ->openUrlInNewTab(),
-            ])
+            ]  ,position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

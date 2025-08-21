@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DailyReport;
 use App\Models\User;
+use App\Models\Cdr;
+use App\Models\MuleAccount;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -122,5 +124,21 @@ class ReportController extends Controller
         }
 
         return view('bank.transactions.tree', ['chains' => $allChains]);
+    }
+
+    public function printMuleAccountPdf($record)
+    {
+        
+        $muleAccount1 = MuleAccount::where('id', $record)->first();
+
+        $muleAccount = MuleAccount::where('outward_no', $muleAccount1->outward_no)->get();
+      
+        return view('print-mule-account', compact('muleAccount'));
+    }
+
+    public function printCdrPdf($record)
+    {
+        $cdr = Cdr::where('id', $record)->first();
+        return view('print-cdr', compact('cdr'));
     }
 }

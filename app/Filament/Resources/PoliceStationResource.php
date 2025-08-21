@@ -39,9 +39,17 @@ class PoliceStationResource extends Resource
                     ->directory('police-stations')
                     ->image()
                     ->nullable(),
-                Forms\Components\RichEditor::make('address')
+                Forms\Components\Textarea::make('address')
                     ->label('Address')
                     ->required(),
+                    Forms\Components\TextInput::make('phone_no')
+                        ->label('Phone Number')
+                        ->tel()
+                        ->required(),
+                    Forms\Components\TextInput::make('email')
+                        ->label('Email')
+                        ->email()
+                        ->required(),
             ]);
     }
 
@@ -53,6 +61,8 @@ class PoliceStationResource extends Resource
                 Tables\Columns\TextColumn::make('pi_name')->label('PI Name')->searchable(),
                 Tables\Columns\ImageColumn::make('pi_sign')->label('PI Sign'),
                 Tables\Columns\ImageColumn::make('seal')->label('Seal'),
+                Tables\Columns\TextColumn::make('email')->label('Email')->searchable(),
+                Tables\Columns\TextColumn::make('phone_no')->label('Phone Number')->searchable(),
               
             ])
             ->filters([

@@ -12,5 +12,7 @@ class PoliceStation extends Model
         'pi_sign',
         'seal',
         'address',
+        'email',
+        'phone_no'
     ];
 }

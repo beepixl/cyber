@@ -16,7 +16,7 @@
         "filament/widgets": "^3.3",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "maatwebsite/excel": "*",
+        "maatwebsite/excel": "^3.1",
         "mpdf/mpdf": "^8.2",
         "pxlrbt/filament-excel": "^2.4",
         "setasign/fpdf": "1.8.*",

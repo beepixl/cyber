@@ -25,3 +25,8 @@ Route::get('/reports/view', [ReportController::class, 'view'])->name('reports.vi
 Route::get('/transactions/tree/{acknowledgement_no}', [ReportController::class, 'showTransactionTree']);
 Route::get('/accused-profiles/{accusedProfile}', [AccusedProfileController::class, 'show'])->name('accused-profiles.show');
 Route::get('/crime-record-cards/print/{record}', [PrintCrimeRecordCard::class, 'generatePdf'])->name('print-crime-record-card-pdf');
+
+
+Route::get('/mule-accounts/print/{record}', [ReportController::class, 'printMuleAccountPdf'])->name('print-mule-account-pdf');
+Route::get('/cdr/print/{record}', [ReportController::class, 'printCdrPdf'])->name('print-cdr-pdf');
+

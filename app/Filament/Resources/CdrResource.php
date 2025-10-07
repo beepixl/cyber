@@ -19,7 +19,15 @@ class CdrResource extends Resource
 {
     protected static ?string $model = Cdr::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'IP & CDR Management';
+        protected static ?string $navigationLabel = 'CDR Records';
+ protected static ?string $navigationIcon = 'heroicon-o-device-phone-mobile';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
 
     public static function form(Form $form): Form
     {
@@ -32,7 +40,7 @@ class CdrResource extends Resource
                         'BSNL' => 'BSNL',
                         'AIRTEL' => 'AIRTEL',
                     ])
-                    ->default(null),
+                    ->default(null)->hiddenOn('create')->hiddenOn('edit'),
 
                 Forms\Components\TextInput::make('sho')
                     ->maxLength(255)

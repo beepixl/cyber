@@ -30,6 +30,10 @@ class BankTransactionsRelationManager extends RelationManager
             TextInput::make('outward_no'),
             TextInput::make('nodal_officer'),
             TextInput::make('transaction_id'),
+                
+            TextInput::make('transaction_id_2'),
+            TextInput::make('ifsc_code'),
+            TextInput::make('reference_no'),
             TextInput::make('account_id'),
             TextInput::make('to_account_id'),
             DatePicker::make('transaction_date'),

@@ -44,6 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
 
+                \App\Filament\Widgets\FeedbackStatsWidget::class,
                 \App\Filament\Widgets\PoliceStationAccusedProfilesChart::class,
                 \App\Filament\Widgets\StateAccusedProfilesChart::class,
                 // Widgets\AccountWidget::class,

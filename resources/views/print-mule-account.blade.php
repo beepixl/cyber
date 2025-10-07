@@ -82,7 +82,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="window.print()">
     <table>
         <tr style="border:none; text-align:center">
             <td style="text-align: center; vertical-align: middle; border:none">
@@ -95,7 +95,7 @@
                 </h2>
                                           
                         Mota Bazar,Navsari–396445,Gujarat<br>
-                        Ph.+91 6359626594 / Email ID: pi-cyber-nav@gujarat.gov.in
+                        Ph.+91 6359626594 / Email ID: pso-cyber-nav@gujarat.gov.in
                     
             </td>
         </tr>
@@ -108,7 +108,7 @@
         <div class="notice-title">Notice U/S 94 of BNSS 2023</div>
         <div>
             To, <br>
-            The Branch Manager<br>
+            The Branch Manager/Nodal Officer<br>
             {{ $muleAccount[0]->nodal_officer }}<br>
             {{ $muleAccount[0]->bank_branch ?? '' }}
         </div>

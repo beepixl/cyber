@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,14 +38,13 @@ return [
 
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', '127.0.0.1'),
-            'port' => env('MAIL_PORT', 2525),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'host' => env('MAIL_HOST', 'webmail.gujarat.gov.in'),
+            'port' => env('MAIL_PORT', 25),
+            'encryption' => 'none',
+            'username' => 'pi-cyber-nav@gujarat.gov.in',
+            'password' => 'Cyber@2526',
+            'timeout' => 30,
+ 
         ],
 
         'ses' => [

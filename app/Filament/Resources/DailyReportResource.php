@@ -19,6 +19,12 @@ class DailyReportResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

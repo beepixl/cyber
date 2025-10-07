@@ -9,8 +9,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-size: 12px;
+            font-size: 14px;
             line-height: 1.6;
+            font-weight: bold;
         }
 
         html{
@@ -82,7 +83,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="window.print()">
  
     <div class="container">
     <div class="text-center">

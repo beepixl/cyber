@@ -24,6 +24,12 @@ class MuleAccountResource extends Resource
         return 'Samanvaya';
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -111,7 +117,29 @@ class MuleAccountResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+          Tables\Filters\SelectFilter::make('outward_no')
+        ->label('Outward No')
+        ->options([
+            'blank' => 'Blank',
+            'filled' => 'Filled',
+        ])
+        ->default('blank') // preselect
+        ->query(function (Builder $query, $state) {
+            // Apply when blank (default)
+            if ($state === null || $state === 'blank') {
+                return $query->where(function ($q) {
+                    $q->whereNull('outward_no')
+                      ->orWhere('outward_no', '');
+                });
+            }
+
+            if ($state === 'filled') {
+                return $query->whereNotNull('outward_no')
+                             ->where('outward_no', '!=', '');
+            }
+
+            return $query;
+        }),
             ])
             ->actions([
             //    Tables\Actions\EditAction::make(),

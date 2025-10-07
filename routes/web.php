@@ -6,15 +6,15 @@ use App\Filament\Resources\CyberCaseResource\Pages\PrintCyberCase;
 use App\Http\Controllers\AccusedProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
+// use Livewire\Livewire;
 
-Livewire::setScriptRoute(function ($handle) {
-    return Route::get('/cyber/public/livewire/livewire.js', $handle);
-});
+// Livewire::setScriptRoute(function ($handle) {
+//     return Route::get('/livewire/livewire.js', $handle);
+// });
 
-Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('/cyber/public/livewire/update', $handle);
-});
+// Livewire::setUpdateRoute(function ($handle) {
+//     return Route::post('/livewire/update', $handle);
+// });
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,4 +29,13 @@ Route::get('/crime-record-cards/print/{record}', [PrintCrimeRecordCard::class, '
 
 Route::get('/mule-accounts/print/{record}', [ReportController::class, 'printMuleAccountPdf'])->name('print-mule-account-pdf');
 Route::get('/cdr/print/{record}', [ReportController::class, 'printCdrPdf'])->name('print-cdr-pdf');
+Route::get('/ipdr/print/{record}', [ReportController::class, 'printIPDRpdf'])->name('print-ipdr-pdf');
+
+use App\Http\Controllers\FeedbackController;
+
+Route::get('/feedback/applicant/{hash}', [FeedbackController::class, 'showApplicant'])->name('feedback.applicant');
+Route::post('/feedback/applicant/{hash}', [FeedbackController::class, 'submitApplicant'])->name('feedback.applicant.submit');
+
+Route::get('/feedback/io/{hash}', [FeedbackController::class, 'showIo'])->name('feedback.io');
+Route::post('/feedback/io/{hash}', [FeedbackController::class, 'submitIo'])->name('feedback.io.submit');
 

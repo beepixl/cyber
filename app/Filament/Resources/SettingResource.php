@@ -26,6 +26,12 @@ class SettingResource extends Resource
 
     protected static ?string $navigationGroup = 'System';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

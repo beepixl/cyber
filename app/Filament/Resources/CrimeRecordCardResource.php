@@ -10,12 +10,19 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Actions\ReplicateAction;
 
 class CrimeRecordCardResource extends Resource
 {
     protected static ?string $model = CrimeRecordCard::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
 
     public static function form(Form $form): Form
     {
@@ -98,6 +105,7 @@ class CrimeRecordCardResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                  ReplicateAction::make(),
                 Tables\Actions\Action::make('Pdf')
                     ->label('PDF')
                     ->icon('heroicon-o-document')

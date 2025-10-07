@@ -37,6 +37,12 @@ class AccusedProfileResource extends Resource
 
     protected static bool $canCreateAnother = false;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->whereNull('case_id');

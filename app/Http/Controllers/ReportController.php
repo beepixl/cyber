@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DailyReport;
 use App\Models\User;
 use App\Models\Cdr;
+use App\Models\Ipdr;
 use App\Models\MuleAccount;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -140,5 +141,12 @@ class ReportController extends Controller
     {
         $cdr = Cdr::where('id', $record)->first();
         return view('print-cdr', compact('cdr'));
+    }
+
+
+    public function printIPDRpdf($record)
+    {
+        $ipdr = Ipdr::where('id', $record)->first();
+        return view('print-ipdr', compact('ipdr'));
     }
 }

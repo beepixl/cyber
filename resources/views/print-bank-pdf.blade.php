@@ -80,7 +80,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="window.print()">
     <table>
         <tr style="border:none">
             <td width="30%" style="text-align: center; vertical-align: middle; border:none">
@@ -116,7 +116,7 @@
             @endif
         </div>
         <div style="margin-top: 15px; text-align: center;">
-            <strong class="notice-title">Sub: Provide complete details of Bank Account Numbers</strong>
+            <strong class="notice-title">Sub: Provide complete details of following Account Numbers</strong>
         </div>
         <div style="margin-top: 15px;">
             Complaint No. <strong>{{ $case->acknowledgement_no }}</strong> has been registered at the Cyber Crime Police Station Navsari. During the inquiry, we found some bank accounts in which some fraud transactions has been done.
@@ -126,15 +126,27 @@
                 <tr>
                   
                     <th>Account Number</th>
-                    <th>IFSC Code</th>
-                    <th>Transaction ID</th>
+                    @php
+                        $hasIfsc = $relatedBankTransactions->contains(function($transaction) {
+                            return !empty($transaction->ifsc_code);
+                        });
+                        $hasTransactionId = $relatedBankTransactions->contains(function($transaction) {
+                            return !empty($transaction->transaction_id_2);
+                        });
+                    @endphp
+                    @if($hasIfsc)
+                        <th>IFSC Code</th>
+                    @endif
+                    @if($hasTransactionId)
+                        <th>Transaction ID</th>
+                    @endif
                     @php
                         $hasRemarks = $relatedBankTransactions->contains(function($transaction) {
                             return !empty($transaction->remarks);
                         });
                     @endphp
                     @if($hasRemarks)
-                        <th>Remarks</th>
+                        <th>Remarks/Transactions IDs</th>
                     @endif
                     
                 </tr>
@@ -145,9 +157,12 @@
                     <tr>
                        
                         <td>{{ $relatedBankTransaction->to_account_id }}</td>
-                        <td>{{ $relatedBankTransaction->ifsc_code }}</td>
-                      
-                        <td>{{ $relatedBankTransaction->transaction_id_2 }}</td>
+                        @if($hasIfsc)
+                            <td>{{ $relatedBankTransaction->ifsc_code }}</td>
+                        @endif
+                        @if($hasTransactionId)
+                            <td>{{ $relatedBankTransaction->transaction_id_2 }}</td>
+                        @endif
                         @if($hasRemarks)
                             <td>{!! $relatedBankTransaction->remarks !!}</td>
                         @endif
@@ -185,7 +200,7 @@
       
         @endphp
         @if($seal)
-            <img src="data:image/png;base64,{{ base64_encode(file_get_contents('http://10.159.191.117/cyber/public/storage/' . ltrim($seal, '/'))) }}" alt="Police Station Seal" style="width: 80px; height: auto;float: left;">
+            <img src="data:image/png;base64,{{ base64_encode(file_get_contents('https://navsaricyber.com/public/storage/' . ltrim($seal, '/'))) }}" alt="Police Station Seal" style="width: 80px; height: auto;float: left;">
         @else
             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/seal.png'))) }}" alt="UL Modi" style="width: 80px; height: auto;float: left;">
         @endif
@@ -195,7 +210,7 @@
                 $pi_sign = optional(optional($case->case)->policeStation)->pi_sign ?? null;
             @endphp
             @if($pi_sign)
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents('http://10.159.191.117/cyber/public/storage/' . ltrim($pi_sign, '/'))) }}" alt="PI Sign" style="width: 80px; height: auto;"><br>
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents('https://navsaricyber.com/storage/' . ltrim($pi_sign, '/'))) }}" alt="PI Sign" style="width: 80px; height: auto;"><br>
             @else
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/sign.png'))) }}" alt="UL Modi" style="width: 80px; height: auto;"><br>
             @endif

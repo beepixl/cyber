@@ -18,6 +18,12 @@ class BankEmailResource extends Resource
 
     protected static ?string $navigationGroup = 'Bank Management';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -64,16 +70,29 @@ class BankEmailResource extends Resource
                     ->label('Filter by Bank'),
             ])
             ->actions([
-                Tables\Actions\Action::make('copy_emails')
-                ->label('Copy Emails')
-                ->icon('heroicon-s-clipboard-document-check')
-                ->action(function ($livewire, $record) {
-                    $livewire->dispatch('copyToClipboard', text: $record->emails);
-                  //  $livewire->notify('success', 'Emails copied to clipboard!');
-                })
-                ->color('secondary')
-                ->visible(fn ($record) => !empty($record->emails)),
-            
+                // Tables\Actions\Action::make('copy_emails')
+                // ->label('Copy Emails')
+                // ->icon('heroicon-s-clipboard-document-check')
+                // ->action(function ($livewire, $record) {
+                //     $livewire->dispatch('copyToClipboard', text: $record->emails);
+                //   //  $livewire->notify('success', 'Emails copied to clipboard!');
+                // })
+                // ->color('secondary')
+                // ->visible(fn ($record) => !empty($record->emails)),
+
+            Tables\Actions\Action::make('send_email')
+    ->label('Send Email')
+    ->icon('heroicon-s-envelope')
+    ->url(fn ($record) =>
+        'mailto:' . $record->emails .
+        '?subject=' . rawurlencode('Provide complete details of Bank Account Numbers Complaint No. / Ak no.') .
+        '&body=' . rawurlencode("Dear Nodal Officer,\n\nProvide complete details of Bank Account Numbers Complaint No. / Ak no.")
+    )
+    ->openUrlInNewTab()
+    ->color('secondary')
+    ->visible(fn ($record) => !empty($record->emails)),
+
+
             
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

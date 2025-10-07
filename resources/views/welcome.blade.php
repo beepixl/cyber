@@ -103,10 +103,11 @@
 <body>
 
     <div class="header">
-        <img src="images/egujcop.png" alt="Logo" class="header-image">
-        <h1>Cyber Crime Police Station - Navsari</h1>
-        <a href="/admin" class="btn btn-warning ms-auto"
-            style="margin-left:auto; margin-right:0; background-color:#ffec00; color:#14195d; font-weight:bold;">Login</a>
+        <img src="images/logoguj.png" alt="Logo" class="header-image">
+        <h1 style="text-align: center;">Cyber Crime Police Station - Navsari</h1>
+        
+        <!-- <a href="/admin" class="btn btn-warning ms-auto"
+            style="margin-left:auto; margin-right:0; background-color:#ffec00; color:#14195d; font-weight:bold;">Login</a> -->
     </div>
 
 
@@ -117,7 +118,7 @@
     <script>
         const jsonData = {
             "categories": [{
-                    "name": "Goverment",
+                    "name": "Important Portals",
                     "items": [{
                             "name": "Cyber Police",
                             "url": "https://cyberpolice.nic.in/",
@@ -173,6 +174,12 @@
                             "url": " https://jcct-i4c.mha.gov.in/",
                             "iconLink": "images/samanvaya.png"
                         },
+                        {
+                            "name": "Navsari Portal",
+                            "url": "https://navsaricyber.com/admin/login/",
+                            "iconLink": "images/nvscrime.png"
+                        },
+
 
 
 

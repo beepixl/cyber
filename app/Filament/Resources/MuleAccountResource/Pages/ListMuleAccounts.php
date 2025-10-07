@@ -38,7 +38,7 @@ class ListMuleAccounts extends ListRecords
                     Excel::import(new MuleAccountImport, $filePath);
                     
     
-                    $this->notify('success', 'Mule Accounts imported successfully!');
+                  //  $this->notify('success', 'Mule Accounts imported successfully!');
                 }),
         ];
     }

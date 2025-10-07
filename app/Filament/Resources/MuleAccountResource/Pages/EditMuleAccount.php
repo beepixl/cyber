@@ -25,13 +25,14 @@ class EditMuleAccount extends EditRecord
                 $model = $this->getRecord();
                 // Only run if the current record's outward_no was previously null
                 if (is_null($model->outward_no)) {
-                    \App\Models\MuleAccount::where('ifsc_code', $data['ifsc_code'])
-                        ->whereNull('outward_no')
-                        ->update([
-                            'outward_no' => $data['outward_no'],
-                            'nodal_officer' => $data['nodal_officer'] ?? null,
-                            'bank_branch' => $data['bank_branch'] ?? null,
-                        ]);
+                  \App\Models\MuleAccount::whereRaw('LEFT(ifsc_code, 4) = ?', [substr($data['ifsc_code'], 0, 4)])
+    ->whereNull('outward_no')
+    ->update([
+        'outward_no'    => $data['outward_no'],
+        'nodal_officer' => $data['nodal_officer'] ?? null,
+        'bank_branch'   => $data['bank_branch'] ?? null,
+    ]);
+
                 }
             }
             return $data;

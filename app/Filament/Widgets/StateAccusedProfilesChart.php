@@ -10,6 +10,12 @@ class StateAccusedProfilesChart extends ChartWidget
 {
     protected static ?string $heading = 'Suspect Profiles by State';
 
+    public static function canView(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->user_type !== 'sp_office';
+    }
+
     protected function getData(): array
     {
         $data = AccusedProfile::query()
@@ -62,7 +68,7 @@ class StateAccusedProfilesChart extends ChartWidget
                         const chartElement = elements[0];
                         const label = this.data.labels[chartElement.index];
                         if (label) {
-                            window.location.href = `http://10.159.191.117/cyber/public/admin/accused-profiles?tableFilters[state][value]=` + encodeURIComponent(label);
+                            window.location.href = `http://navsaricyber.com/admin/accused-profiles?tableFilters[state][value]=` + encodeURIComponent(label);
                         }
                     }
                 }

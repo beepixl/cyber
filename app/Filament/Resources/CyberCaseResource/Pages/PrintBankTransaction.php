@@ -45,12 +45,12 @@ class PrintBankTransaction extends Page
             ])->render();
         }
 
-      //  return $html;
+        return $html;
 
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        // $dompdf->loadHtml($html);
+        // $dompdf->setPaper('A4', 'portrait');
 
-        $dompdf->render();
-        $dompdf->stream($case->outward_no . '.pdf', ['Attachment' => false]);
+        // $dompdf->render();
+        // $dompdf->stream($case->outward_no . '.pdf', ['Attachment' => false]);
     }
 }

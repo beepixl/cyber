@@ -45,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
 
                 \App\Filament\Widgets\FeedbackStatsWidget::class,
+                \App\Filament\Widgets\AarjiPoliceStationStatsWidget::class,
                 \App\Filament\Widgets\PoliceStationAccusedProfilesChart::class,
                 \App\Filament\Widgets\StateAccusedProfilesChart::class,
                 // Widgets\AccountWidget::class,

@@ -4,11 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use App\Models\Aarji;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -37,12 +39,11 @@ class UserResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->label('Password')
+                    Forms\Components\TextInput::make('password')
                     ->password()
-                    ->dehydrateStateUsing(fn ($state) => filled($state) ? $state : null)
-                    ->required(fn (string $operation) => $operation === 'create')
-                    ->maxLength(255),
+                    ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                    ->dehydrated(fn (?string $state): bool => filled($state))
+                    ->required(fn (string $operation): bool => $operation === 'create'),
 
             Forms\Components\Select::make('user_type')
                 ->label('User Type')
@@ -50,9 +51,30 @@ class UserResource extends Resource
                     'admin' => 'Admin',
                     'IT Expert' => 'IT Expert',
                     'sp_office' => 'Sp Office',
+                    'police_station' => 'Police Station',
                     'demo' => 'Demo',
                 ])
-                ->required(),
+                ->required()
+                ->live()
+                ->afterStateUpdated(function ($state, Forms\Set $set) {
+                    if ($state !== 'police_station') {
+                        $set('police_station', 'All');
+                    }
+                }),
+
+            Forms\Components\Select::make('police_station')
+                ->label('Police Station')
+                ->options(fn () => array_merge(
+                    ['All' => 'All'],
+                    Aarji::query()
+                        ->distinct()
+                        ->whereNotNull('police_station')
+                        ->pluck('police_station', 'police_station')
+                        ->toArray()
+                ))
+                ->default('All')
+                ->required()
+                ->visible(fn (Forms\Get $get) => $get('user_type') === 'police_station'),
             ]);
     }
 
@@ -66,6 +88,12 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('user_type')
+                    ->badge()
+                    ->label('User Type'),
+                Tables\Columns\TextColumn::make('police_station')
+                    ->label('Police Station')
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->since()

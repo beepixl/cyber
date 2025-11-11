@@ -28,7 +28,7 @@ class ApplicationRecordPolicy
      */
     public function create(User $user): bool
     {
-        return $user->user_type === 'admin';
+        return in_array($user->user_type, ['admin', 'sp_office']);
     }
 
     /**

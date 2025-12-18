@@ -219,7 +219,7 @@ class AarjiResource extends Resource
         if ($user && $user->user_type === 'police_station' && $user->police_station !== 'All') {
             $query->where('police_station', $user->police_station);
         }
-        
+        $query->orderBy('complaint_date', 'desc');
         return $query;
     }
 

@@ -3,6 +3,7 @@
 use App\Filament\Resources\CrimeRecordCardResource\Pages\PrintCrimeRecordCard;
 use App\Filament\Resources\CyberCaseResource\Pages\PrintBankTransaction;
 use App\Filament\Resources\CyberCaseResource\Pages\PrintCyberCase;
+use App\Filament\Resources\RefundResource\Pages\PrintRefund;
 use App\Http\Controllers\AccusedProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::get('/crime-record-cards/print/{record}', [PrintCrimeRecordCard::class, '
 Route::get('/mule-accounts/print/{record}', [ReportController::class, 'printMuleAccountPdf'])->name('print-mule-account-pdf');
 Route::get('/cdr/print/{record}', [ReportController::class, 'printCdrPdf'])->name('print-cdr-pdf');
 Route::get('/ipdr/print/{record}', [ReportController::class, 'printIPDRpdf'])->name('print-ipdr-pdf');
+Route::get('/refunds/print/{record}', [PrintRefund::class, 'generatePdf'])->name('print-refund-pdf');
 
 use App\Http\Controllers\FeedbackController;
 

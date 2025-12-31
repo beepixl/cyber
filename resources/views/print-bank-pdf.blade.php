@@ -80,7 +80,7 @@
         }
     </style>
 </head>
-<body onload="window.print()">
+<body>
     <table>
         <tr style="border:none">
             <td width="30%" style="text-align: center; vertical-align: middle; border:none">
@@ -145,9 +145,7 @@
                             return !empty($transaction->remarks);
                         });
                     @endphp
-                    @if($hasRemarks)
-                        <th>Remarks/Transactions IDs</th>
-                    @endif
+                   
                     
                 </tr>
             </thead>
@@ -163,9 +161,7 @@
                         @if($hasTransactionId)
                             <td>{{ $relatedBankTransaction->transaction_id_2 }}</td>
                         @endif
-                        @if($hasRemarks)
-                            <td>{!! $relatedBankTransaction->remarks !!}</td>
-                        @endif
+                      
                     </tr>
                 @endforeach
             </tbody>

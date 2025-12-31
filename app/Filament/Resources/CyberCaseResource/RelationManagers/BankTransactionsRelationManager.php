@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CyberCaseResource\RelationManagers;
 
+use App\Models\BankTransaction;
 use App\Imports\ContentsImport;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -150,7 +151,19 @@ class BankTransactionsRelationManager extends RelationManager
                     ]),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->after(function (BankTransaction $record, array $data) {
+                        // When outward_no is updated, update all other transactions 
+                        // for the same bank and same acknowledgement number
+                        if (array_key_exists('outward_no', $data)) {
+                            BankTransaction::where('acknowledgement_no', $record->acknowledgement_no)
+                                ->where('bank_name', $record->bank_name)
+                                ->where('id', '!=', $record->id)
+                                ->update([
+                                    'outward_no' => $data['outward_no'],
+                                ]);
+                        }
+                    }),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('print')
                     ->icon('heroicon-o-printer')

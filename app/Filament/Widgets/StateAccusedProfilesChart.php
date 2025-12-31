@@ -13,7 +13,7 @@ class StateAccusedProfilesChart extends ChartWidget
     public static function canView(): bool
     {
         $user = auth()->user();
-        return $user && $user->user_type !== 'sp_office';
+        return $user && $user->user_type !== 'sp_office' && $user->user_type !== 'police_station';
     }
 
     protected function getData(): array

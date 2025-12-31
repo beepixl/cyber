@@ -34,7 +34,16 @@ class AarjiResource extends Resource
             Forms\Components\Section::make('Aarji Details')->schema([
                 Forms\Components\TextInput::make('ack_no')->label('Acknowledgement Number'),
                 Forms\Components\DatePicker::make('complaint_date')->label('Complaint Date'),
-                Forms\Components\Select::make('police_station')->label('Police Station')->options(Aarji::pluck('police_station', 'police_station')),
+                // Forms\Components\Select::make('police_station')
+                //     ->label('Police Station')
+                //     ->options(Aarji::pluck('police_station', 'police_station'))
+                //     ->readOnly(fn () => auth()->user()->user_type === 'police_station'),
+
+                Forms\Components\Select::make('police_station')
+                    ->label('Police Station')
+                    ->options(Aarji::pluck('police_station', 'police_station'))
+                    ->default(auth()->user()->police_station)
+                    ->disabled(fn () => auth()->user()->user_type === 'police_station'),
                 Forms\Components\TextInput::make('applicant_name')->label('Applicant Name')->required(),
                 Forms\Components\TextInput::make('mobile_number')->label('Applicant Mobile Number')->tel()->required(),
                 Forms\Components\Textarea::make('address')->label('Address'),
@@ -192,11 +201,12 @@ class AarjiResource extends Resource
             ->filtersLayout(FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->visible(fn () => auth()->user()->user_type === 'admin'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                   // Tables\Actions\DeleteBulkAction::make(),
                 ]),
                 
                     //  Tables\Actions\DeleteBulkAction::make(),

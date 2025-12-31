@@ -29,7 +29,7 @@ class SettingResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         $user = auth()->user();
-        return $user && $user->user_type !== 'sp_office';
+        return $user && $user->user_type !== 'sp_office' && $user->user_type !== 'police_station';
     }
 
     public static function form(Form $form): Form

@@ -25,7 +25,7 @@ class PrintBankTransaction extends Page
         $options->set('isPhpEnabled', true);
         $dompdf = new Dompdf($options);
 
-        $case = BankTransaction::with('case')->find($record);
+        $case = BankTransaction::with('case')->findOrFail($record);
         
         $relatedBankTransactions = BankTransaction::where('outward_no', $case->outward_no)->get();
 
@@ -34,23 +34,35 @@ class PrintBankTransaction extends Page
 
         if ($case->info_type == 'Instagram') {
             $html = view('print-instagram-pdf', [
-                'case' => $case, // Fetch all cases or specific data
+                'case' => $case, 
                 'relatedBankTransactions' => $relatedBankTransactions,
             ])->render();
         } else {
             $html = view('print-bank-pdf', [
                 'case' => $case, 
                 'relatedBankTransactions' => $relatedBankTransactions,
-                // Fetch all cases or specific data
             ])->render();
         }
 
-        return $html;
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
 
-        // $dompdf->loadHtml($html);
-        // $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $filename = ($case->outward_no ?? 'transaction_' . $case->id) . '.pdf';
 
-        // $dompdf->render();
-        // $dompdf->stream($case->outward_no . '.pdf', ['Attachment' => false]);
+        $acknowledgementNo = $case->acknowledgement_no ?? $case->id;
+        $bankName = $case->bank_name ?? '';
+        $filename = '';
+        if (!empty($acknowledgementNo) && !empty($bankName) && !empty($case->outward_no)) {
+            $filename = $bankName . ' - ' . $acknowledgementNo . ' - ' . $case->outward_no . '.pdf';
+        } elseif (!empty($acknowledgementNo) && !empty($case->outward_no)) {
+            $filename = $acknowledgementNo . ' - ' . $case->outward_no . '.pdf';
+        } elseif (!empty($case->outward_no)) {
+            $filename = 'transaction_' . $case->outward_no . '.pdf';
+        } else {
+            $filename = 'transaction_' . $case->id . '.pdf';
+        }
+
+        return $dompdf->stream($filename, ['Attachment' => true]);
     }
 }

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cyber Crime Police Station - Navsari</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { 
+      width:100%; 
+      height:100vh;
+      overflow:hidden;
+    }
+    body {
+      font-family:"Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+      color:#1a1a1a;
+      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Header */
+    .header {
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(10px);
+      padding:12px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      flex-shrink:0;
+    }
+    .logo-section {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo {
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #667eea, #764ba2);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#ffffff;
+      font-weight:700;
+      font-size:20px;
+      box-shadow:0 4px 15px rgba(102,126,234,0.4);
+    }
+    .brand-text h1 {
+      font-size:20px;
+      font-weight:700;
+      color:#1a1a1a;
+      margin:0;
+      line-height:1.2;
+    }
+    .brand-text p {
+      font-size:12px;
+      color:#666;
+      margin:0;
+    }
+    .header-actions {
+      display:flex;
+      gap:8px;
+    }
+    .btn {
+      padding:8px 16px;
+      border-radius:20px;
+      border:none;
+      font-size:13px;
+      font-weight:500;
+      cursor:pointer;
+      transition:all 0.3s;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .btn-primary {
+      background:linear-gradient(135deg, #667eea, #764ba2);
+      color:#ffffff;
+      box-shadow:0 4px 15px rgba(102,126,234,0.3);
+    }
+    .btn-primary:hover {
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(102,126,234,0.4);
+    }
+    .btn-outline {
+      background:transparent;
+      color:#667eea;
+      border:2px solid #667eea;
+    }
+    .btn-outline:hover {
+      background:#667eea;
+      color:#ffffff;
+    }
+
+    /* Main Container */
+    .main-container {
+      flex:1;
+      display:flex;
+      overflow:hidden;
+      padding:16px;
+      gap:16px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width:280px;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.1);
+      overflow-y:auto;
+      flex-shrink:0;
+    }
+    .sidebar h3 {
+      font-size:16px;
+      font-weight:600;
+      color:#1a1a1a;
+      margin-bottom:12px;
+    }
+    .sidebar p {
+      font-size:13px;
+      color:#666;
+      margin-bottom:16px;
+      line-height:1.5;
+    }
+    .badge-list {
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-bottom:16px;
+    }
+    .badge {
+      padding:4px 10px;
+      background:linear-gradient(135deg, #667eea, #764ba2);
+      border-radius:12px;
+      font-size:11px;
+      color:#ffffff;
+      font-weight:500;
+    }
+    .alert-box {
+      background:linear-gradient(135deg, #ffeaa7, #fdcb6e);
+      border-radius:10px;
+      padding:12px;
+      font-size:12px;
+      color:#2d3436;
+      margin-top:16px;
+      font-weight:500;
+    }
+
+    /* Main Content */
+    .content-area {
+      flex:1;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.1);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Category Tabs */
+    .category-tabs {
+      display:flex;
+      gap:8px;
+      margin-bottom:20px;
+      border-bottom:2px solid #e0e0e0;
+      flex-shrink:0;
+    }
+    .category-tab {
+      padding:10px 20px;
+      background:transparent;
+      border:none;
+      border-bottom:3px solid transparent;
+      font-size:14px;
+      font-weight:500;
+      color:#666;
+      cursor:pointer;
+      transition:all 0.3s;
+      margin-bottom:-2px;
+    }
+    .category-tab:hover {
+      color:#667eea;
+    }
+    .category-tab.active {
+      color:#667eea;
+      border-bottom-color:#667eea;
+    }
+
+    /* Category Section */
+    .category-section {
+      display:none;
+      flex:1;
+      overflow-y:auto;
+    }
+    .category-section.active {
+      display:block;
+    }
+    .category-title {
+      font-size:18px;
+      font-weight:600;
+      color:#1a1a1a;
+      margin-bottom:16px;
+      padding-bottom:8px;
+      border-bottom:2px solid #e0e0e0;
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+      gap:16px;
+    }
+    .tool-item {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      padding:16px;
+      background:#ffffff;
+      border-radius:16px;
+      border:2px solid #e0e0e0;
+      transition:all 0.3s;
+      cursor:pointer;
+      text-decoration:none;
+      color:inherit;
+    }
+    .tool-item:hover {
+      transform:translateY(-4px);
+      box-shadow:0 8px 25px rgba(102,126,234,0.3);
+      border-color:#667eea;
+    }
+    .tool-icon {
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #667eea, #764ba2);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#ffffff;
+      font-weight:700;
+      font-size:24px;
+      margin-bottom:12px;
+      box-shadow:0 4px 15px rgba(102,126,234,0.3);
+      transition:all 0.3s;
+      overflow:hidden;
+      position:relative;
+    }
+    .tool-icon img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%;
+    }
+    .tool-icon emoji {
+      font-size:32px;
+      line-height:1;
+    }
+    .tool-item:hover .tool-icon {
+      transform:scale(1.1);
+      box-shadow:0 6px 20px rgba(102,126,234,0.4);
+    }
+    .tool-name {
+      font-size:13px;
+      font-weight:600;
+      color:#1a1a1a;
+      line-height:1.3;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width:6px;
+    }
+    ::-webkit-scrollbar-track {
+      background:#f1f1f1;
+      border-radius:10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background:linear-gradient(135deg, #667eea, #764ba2);
+      border-radius:10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background:linear-gradient(135deg, #764ba2, #667eea);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-section">
+      <div class="logo">C</div>
+      <div class="brand-text">
+        <h1>Cyber Crime Police Station</h1>
+        <p>Navsari · Gujarat Police</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="cyber_awareness/V4_cyber_awarness_Full.pdf" target="_blank" class="btn btn-outline" download="1">Citizen Awareness</a>
+      
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Dashboard</h3>
+      <p>Single-screen access to all investigation portals and cyber tools for Navsari Cyber Cell.</p>
+      <div class="badge-list">
+        <span class="badge">National</span>
+        <span class="badge">State</span>
+        <span class="badge">OSINT</span>
+        <span class="badge">Invesigation</span>
+      </div>
+      <h3 style="margin-top:20px;">Emergency</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+        <a href="https://cybercrime.gov.in/" target="_blank" class="btn btn-primary" style="text-align:center;font-size:12px;padding:6px 12px;">File Complaint</a>
+        <a href="https://www.ceir.gov.in/General/index.jsp" target="_blank" class="btn btn-outline" style="text-align:center;font-size:12px;padding:6px 12px;">Block Mobile-CEIR</a>
+        <a href="https://navsaricyber.com/admin/login" target="_blank" class="btn btn-outline" style="text-align:center;font-size:12px;padding:6px 12px;">Navsari cyber Portal</a>
+      </div>
+      <div class="alert-box">
+        <strong>⚠️ ALERT:</strong> For cyber fraud, dial 1930 within 2 hours for fund-freeze.
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content-area">
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <button class="category-tab active" onclick="showCategory('important')">Important Portals</button>
+        <button class="category-tab" onclick="showCategory('osint')">OSINT Tools</button>
+        <button class="category-tab" onclick="showCategory('training')">Investigation</button>
+        <button class="category-tab" onclick="showCategory('lea')">LEA Portal</button>
+        <button class="category-tab" onclick="showCategory('utilities')">Utilities</button>
+      </div>
+
+      <!-- Important Portals -->
+      <div id="category-important" class="category-section active">
+        <h2 class="category-title">Important Portals</h2>
+        <div class="tools-grid">
+           <a href="https://navsaricyber.com/admin/login/" target="_blank" class="tool-item">
+            <div class="tool-icon"><emoji>🔐</emoji></div>
+            <div class="tool-name">Navsari Portal</div>
+          </a>
+          <a href="https://cyberpolice.nic.in/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/cyberpolice.png" alt="NCCRP" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">NCCRP</div>
+          </a>
+            <a href="https://gujaratcybercrime.org/eaglebravo/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/cyberashvasth.jpg" alt="Cyber Aashvast" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Cyber Aashvast</div>
+          </a>
+          <a href="https://webmail.gujarat.gov.in/owa/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/outlook.png" alt="Gov Mail" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Gov Mail</div>
+          </a>
+          <a href="https://www.ceir.gov.in/General/index.jsp" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/certin.jpg" alt="CEIR" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">CEIR</div>
+          </a>
+          <a href="https://jcct-i4c.mha.gov.in/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/samanvaya.png" alt="Samanvaya" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Samanvaya</div>
+          </a>
+          <a href="https://icjs.gov.in/ICJS/login" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/icjs.png" alt="ICJS" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">ICJS Portal</div>
+          </a>
+          <a href="https://icjs.gov.in/esakshya/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/esakshya.png" alt="eSakshya" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">eSakshya</div>
+          </a>
+        
+          <a href="https://egujcop.gujarat.gov.in/hdiits/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/egujcop.png" alt="eGujCop" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">eGujCop</div>
+          </a>
+          
+          <a href="https://karmyogi.gujarat.gov.in/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/karmyogi.png" alt="Karmyogi" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Karmyogi</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- OSINT Tools -->
+      <div id="category-osint" class="category-section">
+        <h2 class="category-title">OSINT Tools</h2>
+        <div class="tools-grid">
+          <a href="file:///C:/Users/Admin/Desktop/web/ip.html" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/ipin.png" alt="IP INFO" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">IP INFO Lookup</div>
+          </a>
+          <a href="file:///C:/Users/Admin/Desktop/web/webcheaker.html" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/webc.png" alt="Website checker" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Website Checker</div>
+          </a>
+          <a href="https://brahmastra.today/admin/dashboard" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/eklavya.png" alt="Eklavya" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Eklavya</div>
+          </a>
+          <a href="https://osintframework.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/osint.png" alt="OSINT Framework" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">OSINT Framework</div>
+          </a>
+          <a href="https://inteltechniques.com/tools/index.html" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/intel.png" alt="IntelTechniques" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">IntelTechniques</div>
+          </a>
+          <a href="https://intelx.io/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/IntelligenceX.png" alt="Intelligence X" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Intelligence X</div>
+          </a>
+          
+          <a href="https://www.shodan.io/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/sodan.png" alt="Shodan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Shodan</div>
+          </a>
+          <a href="https://hcservices.ecourts.gov.in/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/eCourts.png" alt="Case Status" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Case Status</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Training -->
+      <div id="category-training" class="category-section">
+        <h2 class="category-title">Investigation Tools</h2>
+        <div class="tools-grid">
+          <a href="https://www.investigationcamp.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/investigation.png" alt="Investigation Camp" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Investigation Camp</div>
+          </a>
+          <a href="https://www.geospy.net/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/gs.jpg" alt="Investigation Camp" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">GEO SPY</div>
+          </a>
+          <a href="https://guru.cyberyodha.org/dashboard#" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/cyberyoddha.png" alt="Cyber Yodha" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Cyber Yodha</div>
+          </a>
+          <a href="https://www.tineye.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/tineye.png" alt="TinEye" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">TinEye</div>
+          </a>
+          <a href="https://cytrain.ncrb.gov.in/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/cytrain.png" alt="Cytrain" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Cytrain</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- LEA Portal -->
+      <div id="category-lea" class="category-section">
+        <h2 class="category-title">LEA Portal</h2>
+        <div class="tools-grid">
+          <a href="https://www.whatsapp.com/records/login/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/whatsapp.jpg" alt="LEA WhatsApp" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA WhatsApp</div>
+          </a>
+          <a href="https://www.facebook.com/records/login/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/facebook.jpeg" alt="LEA Facebook" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA Facebook</div>
+          </a>
+          <a href="https://cybercell.phonepe.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/phonepe.png" alt="LEA PhonePE" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA Phonepe</div>
+          </a>
+          </a>
+          <a href="https://lert.uber.com/s/?language=en_US" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/uber.png" alt="LEA Uber" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA Uber</div>
+          </a>
+          <a href="https://leportal.microsoft.com/dashboard" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/msoft.png" alt="LEA Facebook" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA Microsoft</div>
+          </a>
+          <a href="https://razorpay.com/support/?cybercrime=true" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/raz.jpeg" alt="RazorPay" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA Razorpay</div>
+          </a>
+          <a href="https://ler.amazon.com/us" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/az.png" alt="LEA Amazon" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">LEA AMAZON</div>
+          </a>
+          <a href="https://lers.google.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/googlelers.jpg" alt="Google LERS" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Google LERS</div>
+          </a>
+          <a href="https://app.kodexglobal.com/gujarat-state-police,-india/requests" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/kodex.png" alt="Kodex" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Kodex</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Utilities -->
+      <div id="category-utilities" class="category-section">
+        <h2 class="category-title">Utilities</h2>
+        <div class="tools-grid">
+          <a href="https://www.toolfk.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/toolfk.png" alt="Tookfk" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Tool FK</div>
+          </a>
+          <a href="https://www.google.com/maps/d/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/map.png" alt="Google Maps" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Google Maps</div>
+          </a>
+          <a href="https://translate.google.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/google_translate.png" alt="Translate" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Translate</div>
+          </a>
+          <a href="https://github.com/edoardottt/awesome-hacker-search-engines" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/GitHub.png" alt="Hacker Search" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Hacker Search</div>
+          </a>
+          <a href="https://github.com/topics/kali-linux" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/kali.png" alt="Kali Linux" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Kali Linux</div>
+          </a>
+          <a href="https://lira.epac.to/DOCS-TECH/Hacking/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/docs.png" alt="DOCS-TECH" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">DOCS-TECH</div>
+          </a>
+          <a href="https://www.mindluster.com/" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="images/mindl.jpeg" alt="Mind Luster" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="tool-name">Mind Luster</div>
+          </a>
+        </div>
+      </div>
+    </main>
+</div>
+
+<script>
+    function showCategory(name) {
+      const sections = document.querySelectorAll('.category-section');
+      const tabs = document.querySelectorAll('.category-tab');
+      sections.forEach(s => s.classList.remove('active'));
+    tabs.forEach(t => t.classList.remove('active'));
+      document.getElementById('category-' + name).classList.add('active');
+      event.target.classList.add('active');
+    }
+</script>
+
+</body>
+</html>

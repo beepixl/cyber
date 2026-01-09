@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IP Info Lookup</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0d1523;--card:#16263c;--accent:#06b6d4;--muted:#a8b3c4}
+*{box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+body{margin:0;background:radial-gradient(circle at 10% 10%,rgba(6,182,212,.06),transparent 10%),linear-gradient(180deg,#071022,#041021);color:#e6f7fb;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.container{max-width:420px;width:100%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+h1{text-align:center;font-size:22px;margin:0 0 16px}
+.field{display:flex;gap:8px;margin-bottom:12px}
+input{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;transition:.2s}
+input:focus{border-color:var(--accent)}
+button{padding:12px 16px;border:none;border-radius:10px;background:linear-gradient(90deg,var(--accent),#7dd3fc);color:#04243a;font-weight:700;cursor:pointer;transition:.2s}
+button:hover{transform:scale(1.02)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--muted);font-weight:500;padding:10px 12px}
+.btn-ghost:hover{border-color:var(--accent);color:#fff}
+.result{margin-top:16px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,.03);box-shadow:0 4px 20px rgba(0,0,0,.6)}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.flag{width:70px;height:48px;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center}
+.ip{font-size:18px;font-weight:700}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.row{background:rgba(255,255,255,.02);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.02);font-size:13px}
+.k{color:var(--muted);font-size:12px;display:block;margin-bottom:4px}
+.v{font-weight:600}
+.error{color:#ff9aa2;background:rgba(255,0,0,.05);padding:10px;border-radius:8px;text-align:center}
+.actions{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+footer{text-align:center;font-size:12px;color:var(--muted);margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
+footer a{color:var(--accent);font-size:22px;text-decoration:none;transition:.3s}
+footer a:hover{color:#7dd3fc;transform:scale(1.1)}
+@media(max-width:500px){.flag{width:60px;height:42px}.ip{font-size:16px}}
+</style>
+</head>
+<body>
+
+<div class="container">
+<header>
+    <h1>Cyber Crime Police Station Navsari</h1>
+      </header>
+
+<div class="field">
+<input id="ipInput" placeholder="Enter IP (optional)" />
+<button id="btnFetch">Lookup</button>
+</div>
+<div class="actions">
+<button id="btnMyIp" class="btn-ghost">Use my IP</button>
+<button id="btnClear" class="btn-ghost">Clear</button>
+</div>
+<div id="msg" style="text-align:center;margin-top:10px;font-size:13px;"></div>
+<div class="result" id="output"><div class="card" style="text-align:center;color:var(--muted)">Enter an IP and tap Lookup.</div></div>
+<footer>
+
+<span>© 2026 IP Info Tool</span>
+</footer>
+</div>
+<script>
+const btn=document.getElementById('btnFetch'),ipInput=document.getElementById('ipInput'),output=document.getElementById('output'),msg=document.getElementById('msg'),btnMy=document.getElementById('btnMyIp'),btnClear=document.getElementById('btnClear');
+function showError(t){output.innerHTML='<div class="error">'+t+'</div>'}
+function setMsg(h=''){msg.innerHTML=h}
+function renderCard(d){const ip=d.ip||'—',type=d.type||'—',country=d.country||'—',code=d.country_code||'',region=d.region||'—',city=d.city||'—',lat=d.latitude??'—',lon=d.longitude??'—',postal=d.postal||'—',calling=d.calling_code||'—',capital=d.capital||'—',borders=d.borders||'—',flag=d.flag?.img,flagEmoji=d.flag?.emoji||'',conn=d.connection||{},asn=conn.asn||'—',org=conn.org||'—',isp=conn.isp||'—',domain=conn.domain||'—',tz=d.timezone||{},tzId=tz.id||'—',tzAbbr=tz.abbr||'—',tzTime=tz.current_time||'—';
+output.innerHTML=`<div class="card">
+<div class="top"><div class="flag">${flag?`<img src="${flag}" style="width:100%;height:100%;object-fit:cover">`:flagEmoji||'🏳️'}</div>
+<div><div class="ip">${ip} <span style="font-size:12px;color:var(--muted)">(${type})</span></div>
+<div class="muted">${city}, ${region} — ${country} ${code}</div></div></div>
+<div class="grid">
+<div class="row"><span class="k">Latitude / Longitude</span><span class="v">${lat} , ${lon}</span></div>
+<div class="row"><span class="k">Postal / Calling</span><span class="v">${postal} · +${calling.replace('+','')}</span></div>
+<div class="row"><span class="k">Capital / Borders</span><span class="v">${capital} · ${borders}</span></div>
+<div class="row"><span class="k">ASN / Org</span><span class="v">AS${asn} · ${org}</span></div>
+<div class="row"><span class="k">ISP</span><span class="v">${isp}</span></div>
+<div class="row"><span class="k">Domain</span><span class="v">${domain}</span></div>
+<div class="row"><span class="k">Timezone</span><span class="v">${tzId} ${tzAbbr}</span></div>
+<div class="row"><span class="k">Current Time</span><span class="v">${tzTime}</span></div>
+</div>
+<div class="actions">
+<button id="copyBtn" class="btn-ghost">Copy</button>
+<button id="rawBtn" class="btn-ghost">Raw</button>
+</div></div>`;
+document.getElementById('copyBtn').onclick=()=>{const s=`IP: ${ip} (${type}) | ${city}, ${region}, ${country} ${code} | ISP: ${isp} | ASN: ${asn}`;navigator.clipboard.writeText(s).then(()=>{setMsg('<span style="color:#7ef0c4">Copied ✔</span>');setTimeout(()=>setMsg(''),2500)})};
+document.getElementById('rawBtn').onclick=()=>{const c=JSON.parse(JSON.stringify(d));delete c.About_Us;output.innerHTML='<pre style="white-space:pre-wrap;font-size:12px;background:rgba(0,0,0,.05);padding:12px;border-radius:8px">'+JSON.stringify(c,null,2)+'</pre><div class="actions"><button id="back" class="btn-ghost">Back</button></div>';document.getElementById('back').onclick=()=>renderCard(d)}}
+async function fetchIP(ip){try{setMsg('');output.innerHTML='<div class="card" style="text-align:center;color:var(--muted)">Loading...</div>';const e=ip?`https://ipwho.is/${encodeURIComponent(ip)}`:'https://ipwho.is/';const r=await fetch(e,{cache:'no-store'});if(!r.ok){showError('Network '+r.status);return}const j=await r.json();if(j.success===false){showError(j.message||'No data');return}delete j.About_Us;renderCard(j)}catch(err){showError('Error '+err.message)}}
+btn.onclick=()=>fetchIP(ipInput.value.trim());
+ipInput.onkeydown=e=>{if(e.key==='Enter')fetchIP(ipInput.value.trim())};
+btnMy.onclick=()=>{ipInput.value='';fetchIP('')};
+btnClear.onclick=()=>{ipInput.value='';output.innerHTML='<div class="card" style="text-align:center;color:var(--muted)">Enter an IP and tap Lookup.</div>';setMsg('')}
+</script>
+</body>
+</html>

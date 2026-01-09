@@ -31,6 +31,42 @@ class BankEmailResource extends Resource
                 Forms\Components\TextInput::make('bank')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('type')
+                    ->options([
+                        'Co-op Bank' => 'Co-op Bank',
+                        'Fintech' => 'Fintech',
+                        'Payments Bank' => 'Payments Bank',
+                        'E-Commerce' => 'E-Commerce',
+                        'Bank/Card' => 'Bank/Card',
+                        'Rural Bank' => 'Rural Bank',
+                        'Bank' => 'Bank',
+                        'Insurance' => 'Insurance',
+                        'Finance' => 'Finance',
+                        'Govt/PSU' => 'Govt/PSU',
+                        'Crypto/Fintech' => 'Crypto/Fintech',
+                        'Crypto' => 'Crypto',
+                        'Real Estate' => 'Real Estate',
+                        'Bank/Corp' => 'Bank/Corp',
+                        'Government' => 'Government',
+                        'Social Media' => 'Social Media',
+                        'Cloud/Tech' => 'Cloud/Tech',
+                        'Tech' => 'Tech',
+                        'Tech/ISP' => 'Tech/ISP',
+                        'Hosting/Domain' => 'Hosting/Domain',
+                        'Institutions' => 'Institutions',
+                        'Tech/Comms' => 'Tech/Comms',
+                        'Logistics/Tech' => 'Logistics/Tech',
+                        'Food Tech' => 'Food Tech',
+                        'Services Tech' => 'Services Tech',
+                        'Retail' => 'Retail',
+                        'Travel Tech' => 'Travel Tech',
+                        'Social/Matrimony' => 'Social/Matrimony',
+                        'Aviation' => 'Aviation',
+                        'Placeholder' => 'Placeholder',
+                        'Police/Cyber' => 'Police/Cyber',
+                    ])
+                    ->searchable()
+                    ->preload(),
                 Forms\Components\Textarea::make('emails')
                     ->required()
                     ->rows(5)
@@ -44,6 +80,10 @@ class BankEmailResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('bank')
+                ->label('Institution Name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('type')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('emails')
@@ -51,6 +91,7 @@ class BankEmailResource extends Resource
                     ->wrap()
                     ->copyable()
                     ->limit(100),
+                    
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -68,6 +109,44 @@ class BankEmailResource extends Resource
                     ->searchable()
                     ->preload()
                     ->label('Filter by Bank'),
+
+                    Tables\Filters\SelectFilter::make('type')
+                    ->options([
+                        'Co-op Bank' => 'Co-op Bank',
+                        'Fintech' => 'Fintech',
+                        'Payments Bank' => 'Payments Bank',
+                        'E-Commerce' => 'E-Commerce',
+                        'Bank/Card' => 'Bank/Card',
+                        'Rural Bank' => 'Rural Bank',
+                        'Bank' => 'Bank',
+                        'Insurance' => 'Insurance',
+                        'Finance' => 'Finance',
+                        'Govt/PSU' => 'Govt/PSU',
+                        'Crypto/Fintech' => 'Crypto/Fintech',
+                        'Crypto' => 'Crypto',
+                        'Real Estate' => 'Real Estate',
+                        'Bank/Corp' => 'Bank/Corp',
+                        'Government' => 'Government',
+                        'Social Media' => 'Social Media',
+                        'Cloud/Tech' => 'Cloud/Tech',
+                        'Tech' => 'Tech',
+                        'Tech/ISP' => 'Tech/ISP',
+                        'Hosting/Domain' => 'Hosting/Domain',
+                        'Institutions' => 'Institutions',
+                        'Tech/Comms' => 'Tech/Comms',
+                        'Logistics/Tech' => 'Logistics/Tech',
+                        'Food Tech' => 'Food Tech',
+                        'Services Tech' => 'Services Tech',
+                        'Retail' => 'Retail',
+                        'Travel Tech' => 'Travel Tech',
+                        'Social/Matrimony' => 'Social/Matrimony',
+                        'Aviation' => 'Aviation',
+                        'Placeholder' => 'Placeholder',
+                        'Police/Cyber' => 'Police/Cyber',
+                    ])
+                    ->searchable()
+                    ->preload()
+                    ->label('Filter by Type'),
             ])
             ->actions([
                 // Tables\Actions\Action::make('copy_emails')
@@ -95,11 +174,11 @@ class BankEmailResource extends Resource
 
             
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+              //  Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                   // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

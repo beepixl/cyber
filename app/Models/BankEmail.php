@@ -12,5 +12,6 @@ class BankEmail extends Model
     protected $fillable = [
         'bank',
         'emails',
+        'type'
     ];
 }
